@@ -16,7 +16,8 @@
   },
   // Include/Exclude is for collections or groups of files or folders, etc..
   "include": [
-    "./src/**/*",
+    "./src/*",
+    "./types/factories/*",
   ],
   // Specify separate files directly by their path
   "files": [

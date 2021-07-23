@@ -2,4 +2,10 @@
 node_modules
 cache
 artifacts
+
+# we bundle in the dist/ so it's easy to use this repo as a npm package
+# however we it's safe to ignore the compiled types, since we only 
+types
+!dist/types
+
 elf-contracts
