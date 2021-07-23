@@ -1,6 +1,8 @@
 {
   "name": "elf-contracts-typechain",
-  "dependencies": {},
+  "dependencies": {
+    "tsc": "^2.0.3"
+  },
   "devDependencies": {
     "@typechain/hardhat": "^2.2.0",
     "@types/ethereumjs-abi": "^0.6.3",
