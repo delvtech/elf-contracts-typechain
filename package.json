@@ -1,5 +1,7 @@
 {
   "name": "elf-contracts-typechain",
+  "version": "1.0.0",
+  "description": "",
   "dependencies": {
     "tsc": "^2.0.3"
   },
