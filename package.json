@@ -5,6 +5,7 @@
   "dependencies": {
     "tsc": "^2.0.3"
   },
+  "types": "dist/types",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-vyper": "^2.0.1",
