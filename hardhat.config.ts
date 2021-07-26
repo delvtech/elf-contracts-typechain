@@ -1,5 +1,3 @@
-// uncomment this to compile vyper contracts
-// import "@nomiclabs/hardhat-vyper";
 import "@typechain/hardhat";
 
 import { HardhatUserConfig } from "hardhat/config";
@@ -8,13 +6,6 @@ const config: HardhatUserConfig = {
   paths: {
     sources: "src",
   },
-  // uncomment this to compile vyper contracts.  the version in the file must match.
-  // vyper: {
-  // CRVPool
-  // version: "0.2.12",
-  // CRVToken
-  //   version: "0.2.8",
-  // },
   solidity: {
     compilers: [
       {
