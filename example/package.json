@@ -4,12 +4,19 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "example": "npx hardhat run index.ts --network mainnet  --no-compile",
     "update-elf-contracts-typechain": "npm install git+https://github.com/element-fi/elf-contracts-typechain.git"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "elf-contracts-typechain": "git+https://github.com/element-fi/elf-contracts-typechain.git"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "ethers": "^5.4.2",
+    "hardhat": "^2.5.0",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
   }
 }
