@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BaseGeneralPool__factory = void 0;
-const ethers_1 = require("ethers");
-const _abi = [
+var ethers_1 = require("ethers");
+var _abi = [
     {
         anonymous: false,
         inputs: [
@@ -808,13 +808,16 @@ const _abi = [
         type: "function",
     },
 ];
-class BaseGeneralPool__factory {
-    static abi = _abi;
-    static createInterface() {
+var BaseGeneralPool__factory = /** @class */ (function () {
+    function BaseGeneralPool__factory() {
+    }
+    BaseGeneralPool__factory.createInterface = function () {
         return new ethers_1.utils.Interface(_abi);
-    }
-    static connect(address, signerOrProvider) {
+    };
+    BaseGeneralPool__factory.connect = function (address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    }
-}
+    };
+    BaseGeneralPool__factory.abi = _abi;
+    return BaseGeneralPool__factory;
+}());
 exports.BaseGeneralPool__factory = BaseGeneralPool__factory;

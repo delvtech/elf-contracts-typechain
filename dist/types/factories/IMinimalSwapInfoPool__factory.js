@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IMinimalSwapInfoPool__factory = void 0;
-const ethers_1 = require("ethers");
-const _abi = [
+var ethers_1 = require("ethers");
+var _abi = [
     {
         inputs: [
             {
@@ -191,13 +191,16 @@ const _abi = [
         type: "function",
     },
 ];
-class IMinimalSwapInfoPool__factory {
-    static abi = _abi;
-    static createInterface() {
+var IMinimalSwapInfoPool__factory = /** @class */ (function () {
+    function IMinimalSwapInfoPool__factory() {
+    }
+    IMinimalSwapInfoPool__factory.createInterface = function () {
         return new ethers_1.utils.Interface(_abi);
-    }
-    static connect(address, signerOrProvider) {
+    };
+    IMinimalSwapInfoPool__factory.connect = function (address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    }
-}
+    };
+    IMinimalSwapInfoPool__factory.abi = _abi;
+    return IMinimalSwapInfoPool__factory;
+}());
 exports.IMinimalSwapInfoPool__factory = IMinimalSwapInfoPool__factory;

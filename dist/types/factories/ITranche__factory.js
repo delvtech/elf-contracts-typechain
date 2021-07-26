@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ITranche__factory = void 0;
-const ethers_1 = require("ethers");
-const _abi = [
+var ethers_1 = require("ethers");
+var _abi = [
     {
         anonymous: false,
         inputs: [
@@ -405,13 +405,16 @@ const _abi = [
         type: "function",
     },
 ];
-class ITranche__factory {
-    static abi = _abi;
-    static createInterface() {
+var ITranche__factory = /** @class */ (function () {
+    function ITranche__factory() {
+    }
+    ITranche__factory.createInterface = function () {
         return new ethers_1.utils.Interface(_abi);
-    }
-    static connect(address, signerOrProvider) {
+    };
+    ITranche__factory.connect = function (address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    }
-}
+    };
+    ITranche__factory.abi = _abi;
+    return ITranche__factory;
+}());
 exports.ITranche__factory = ITranche__factory;

@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Authentication__factory = void 0;
-const ethers_1 = require("ethers");
-const _abi = [
+var ethers_1 = require("ethers");
+var _abi = [
     {
         inputs: [
             {
@@ -26,13 +26,16 @@ const _abi = [
         type: "function",
     },
 ];
-class Authentication__factory {
-    static abi = _abi;
-    static createInterface() {
+var Authentication__factory = /** @class */ (function () {
+    function Authentication__factory() {
+    }
+    Authentication__factory.createInterface = function () {
         return new ethers_1.utils.Interface(_abi);
-    }
-    static connect(address, signerOrProvider) {
+    };
+    Authentication__factory.connect = function (address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    }
-}
+    };
+    Authentication__factory.abi = _abi;
+    return Authentication__factory;
+}());
 exports.Authentication__factory = Authentication__factory;

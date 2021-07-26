@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("@typechain/hardhat");
-const config = {
+var config = {
     paths: {
         sources: "src",
     },
@@ -29,10 +29,10 @@ const config = {
             allowUnlimitedContractSize: true,
         },
         mainnet: {
-            url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_MAINNET_API_KEY}`,
+            url: "https://eth-mainnet.alchemyapi.io/v2/" + process.env.ALCHEMY_MAINNET_API_KEY,
         },
         goerli: {
-            url: `https://eth-goerli.alchemyapi.io/v2/${process.env.ALCHEMY_GOERLI_API_KEY}`,
+            url: "https://eth-goerli.alchemyapi.io/v2/" + process.env.ALCHEMY_GOERLI_API_KEY,
         },
     },
 };

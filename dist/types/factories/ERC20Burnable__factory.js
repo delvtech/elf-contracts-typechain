@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ERC20Burnable__factory = void 0;
-const ethers_1 = require("ethers");
-const _abi = [
+var ethers_1 = require("ethers");
+var _abi = [
     {
         anonymous: false,
         inputs: [
@@ -308,13 +308,16 @@ const _abi = [
         type: "function",
     },
 ];
-class ERC20Burnable__factory {
-    static abi = _abi;
-    static createInterface() {
+var ERC20Burnable__factory = /** @class */ (function () {
+    function ERC20Burnable__factory() {
+    }
+    ERC20Burnable__factory.createInterface = function () {
         return new ethers_1.utils.Interface(_abi);
-    }
-    static connect(address, signerOrProvider) {
+    };
+    ERC20Burnable__factory.connect = function (address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    }
-}
+    };
+    ERC20Burnable__factory.abi = _abi;
+    return ERC20Burnable__factory;
+}());
 exports.ERC20Burnable__factory = ERC20Burnable__factory;

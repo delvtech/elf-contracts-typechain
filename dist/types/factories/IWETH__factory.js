@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IWETH__factory = void 0;
-const ethers_1 = require("ethers");
-const _abi = [
+var ethers_1 = require("ethers");
+var _abi = [
     {
         anonymous: false,
         inputs: [
@@ -261,13 +261,16 @@ const _abi = [
         type: "function",
     },
 ];
-class IWETH__factory {
-    static abi = _abi;
-    static createInterface() {
+var IWETH__factory = /** @class */ (function () {
+    function IWETH__factory() {
+    }
+    IWETH__factory.createInterface = function () {
         return new ethers_1.utils.Interface(_abi);
-    }
-    static connect(address, signerOrProvider) {
+    };
+    IWETH__factory.connect = function (address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    }
-}
+    };
+    IWETH__factory.abi = _abi;
+    return IWETH__factory;
+}());
 exports.IWETH__factory = IWETH__factory;

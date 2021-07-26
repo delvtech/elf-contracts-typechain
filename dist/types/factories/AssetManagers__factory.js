@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AssetManagers__factory = void 0;
-const ethers_1 = require("ethers");
-const _abi = [
+var ethers_1 = require("ethers");
+var _abi = [
     {
         anonymous: false,
         inputs: [
@@ -1154,13 +1154,16 @@ const _abi = [
         type: "function",
     },
 ];
-class AssetManagers__factory {
-    static abi = _abi;
-    static createInterface() {
+var AssetManagers__factory = /** @class */ (function () {
+    function AssetManagers__factory() {
+    }
+    AssetManagers__factory.createInterface = function () {
         return new ethers_1.utils.Interface(_abi);
-    }
-    static connect(address, signerOrProvider) {
+    };
+    AssetManagers__factory.connect = function (address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    }
-}
+    };
+    AssetManagers__factory.abi = _abi;
+    return AssetManagers__factory;
+}());
 exports.AssetManagers__factory = AssetManagers__factory;
