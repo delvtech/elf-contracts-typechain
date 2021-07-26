@@ -5,6 +5,7 @@
   "dependencies": {
     "tsc": "^2.0.3"
   },
+  "module": "elf-contracts-typechain",
   "types": "dist/types",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
