@@ -4,7 +4,7 @@ rm -rf artifacts types dist
 npx hardhat compile
 
 # Compile the factory definitions
-tsc --project tsconfig.json --outDir dist/ --declaration --emitDeclarationOnly
+tsc --project tsconfig.json --outDir dist/ --declaration
 
 # Copy over contract definitions
 cp types/* dist/types
