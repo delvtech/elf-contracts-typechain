@@ -15,7 +15,7 @@
   },
   // Include/Exclude is for collections or groups of files or folders, etc..
   "include": [
-    "./src/*",
+    "./src/localTypes/factories/*",
     "./types/factories/*",
     "./types/index.ts",
   ],
