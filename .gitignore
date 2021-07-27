@@ -3,6 +3,9 @@ node_modules
 cache
 artifacts
 
+# don't check in the compiled typescript factories
+compiled
+
 # Don't check in the compiled types, as they aren't the complete picture (no local contracts)
 types
 
