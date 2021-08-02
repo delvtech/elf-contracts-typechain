@@ -2,7 +2,6 @@
   "name": "elf-contracts-typechain-example",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
   "scripts": {
     "example": "npx hardhat run index.ts --network mainnet  --no-compile",
     "update-elf-contracts-typechain": "npm install git+https://github.com/element-fi/elf-contracts-typechain.git"
