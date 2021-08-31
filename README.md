@@ -10,7 +10,7 @@ npm install git+https://github.com/element-fi/elf-contracts-typechain.git
 
 ## Development
 
-Make changes or add new contracts in the `src/` directory then run the build command:
+Make changes or add new contracts in the `src/localContracts` directory then run the build command:
 ```
 npm run build
 ```
