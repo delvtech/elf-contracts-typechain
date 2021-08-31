@@ -7,6 +7,10 @@ if [ ! -z "$1" ] && [ $1="local" ]; then
     ln -sf ../../elf-contracts .
 else
     git clone git@github.com:element-fi/elf-contracts.git
+    cd elf-contracts/
+    # load the balancer-v2 contracts which are gitignored in the elf-contracts repo
+    npm run load-contracts
+    cd ../
 fi
 
 # blow away old-contracts
