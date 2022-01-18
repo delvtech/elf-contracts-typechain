@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.0;
 
-import "../interfaces/IYearnVaultV2.sol";
+import "../interfaces/IYearnVault.sol";
 import "../libraries/Authorizable.sol";
 import "../interfaces/IERC20.sol";
 import "../interfaces/ITranche.sol";
@@ -33,7 +33,7 @@ contract ZapTrancheHop is Authorizable {
 
     /// @dev Allows an authorized address to freeze or unfreeze this contract
     /// @param _newState True for frozen and false for unfrozen
-    function setIsFrozen(bool _newState) external onlyAuthorized() {
+    function setIsFrozen(bool _newState) external onlyAuthorized {
         isFrozen = _newState;
     }
 
@@ -111,8 +111,8 @@ contract ZapTrancheHop is Authorizable {
     /// @return The derived Tranche contract
     function _deriveTranche(address _position, uint256 _expiration)
         internal
-        virtual
         view
+        virtual
         returns (ITranche)
     {
         bytes32 salt = keccak256(abi.encodePacked(_position, _expiration));
