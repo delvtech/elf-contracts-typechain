@@ -1,5 +1,5 @@
 pragma solidity ^0.8.0;
-import "../interfaces/IYearnVaultV2.sol";
+import "../interfaces/IYearnVault.sol";
 import "../libraries/Authorizable.sol";
 import "../libraries/ERC20Permit.sol";
 
@@ -38,13 +38,17 @@ contract MockERC20YearnVault is IYearnVault, Authorizable, ERC20Permit {
         lockedProfitDegradation = (DEGRADATION_COEFFICIENT * 46) / 1e6;
     }
 
+    function apiVersion() external pure override returns (string memory) {
+        return ("0.3.2");
+    }
+
     /**
     @notice Add tokens to the vault. Increases totalAssets.
     @param _deposit The amount of tokens to deposit
     @dev There is no logic to rebalance lockedAmount.
     Repeat calls will just reset it.
     */
-    function report(uint256 _deposit) external onlyAuthorized() {
+    function report(uint256 _deposit) external onlyAuthorized {
         lastReport = block.timestamp;
         // mock vault does not take performance or management fee
         // so the full deposit is locked profit.
@@ -98,7 +102,7 @@ contract MockERC20YearnVault is IYearnVault, Authorizable, ERC20Permit {
     /**
     @notice Returns the amount of underlying per each unit [10^decimals] of yearn shares
      */
-    function pricePerShare() public override view returns (uint256) {
+    function pricePerShare() public view override returns (uint256) {
         return _shareValue(10**decimals);
     }
 
@@ -106,7 +110,7 @@ contract MockERC20YearnVault is IYearnVault, Authorizable, ERC20Permit {
     @notice Get the governance address. It will be address(0)
     it is not used for this mock.
      */
-    function governance() public override view returns (address) {
+    function governance() public view override returns (address) {
         return address(0);
     }
 
@@ -123,7 +127,7 @@ contract MockERC20YearnVault is IYearnVault, Authorizable, ERC20Permit {
     @dev This is a mock and there is no debt. The total assets are just the
     underlying tokens held by the contract.
      */
-    function totalAssets() public override view returns (uint256) {
+    function totalAssets() public view override returns (uint256) {
         return token.balanceOf(address(this));
     }
 
@@ -179,7 +183,7 @@ contract MockERC20YearnVault is IYearnVault, Authorizable, ERC20Permit {
     @notice Get the total number of vault shares.
     @return Total vault shares.
      */
-    function totalSupply() external override view returns (uint256) {
+    function totalSupply() external view override returns (uint256) {
         return totalShares;
     }
 }
