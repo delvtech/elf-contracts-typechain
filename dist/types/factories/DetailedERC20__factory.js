@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DetailedERC20__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         constant: true,
         inputs: [],
@@ -241,16 +241,13 @@ var _abi = [
         type: "event",
     },
 ];
-var DetailedERC20__factory = /** @class */ (function () {
-    function DetailedERC20__factory() {
-    }
-    DetailedERC20__factory.createInterface = function () {
+class DetailedERC20__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    DetailedERC20__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    DetailedERC20__factory.abi = _abi;
-    return DetailedERC20__factory;
-}());
+    }
+}
 exports.DetailedERC20__factory = DetailedERC20__factory;
+DetailedERC20__factory.abi = _abi;

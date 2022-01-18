@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { DAI, DAIInterface } from "../DAI";
 export declare class DAI__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(sender: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<DAI>;

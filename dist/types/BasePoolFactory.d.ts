@@ -16,7 +16,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface BasePoolFactoryInterface extends ethers.utils.Interface {
   functions: {
@@ -42,6 +42,8 @@ interface BasePoolFactoryInterface extends ethers.utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: "PoolCreated"): EventFragment;
 }
+
+export type PoolCreatedEvent = TypedEvent<[string] & { pool: string }>;
 
 export class BasePoolFactory extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -109,6 +111,10 @@ export class BasePoolFactory extends BaseContract {
   };
 
   filters: {
+    "PoolCreated(address)"(
+      pool?: string | null
+    ): TypedEventFilter<[string], { pool: string }>;
+
     PoolCreated(
       pool?: string | null
     ): TypedEventFilter<[string], { pool: string }>;

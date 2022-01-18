@@ -2,7 +2,7 @@ import { Signer, BigNumberish, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { TestToken, TestTokenInterface } from "../TestToken";
 export declare class TestToken__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(admin: string, name: string, symbol: string, decimals: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<TestToken>;

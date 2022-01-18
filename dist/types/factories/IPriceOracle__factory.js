@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IPriceOracle__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         inputs: [],
         name: "getLargestSafeQueryWindow",
@@ -106,16 +106,13 @@ var _abi = [
         type: "function",
     },
 ];
-var IPriceOracle__factory = /** @class */ (function () {
-    function IPriceOracle__factory() {
-    }
-    IPriceOracle__factory.createInterface = function () {
+class IPriceOracle__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IPriceOracle__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IPriceOracle__factory.abi = _abi;
-    return IPriceOracle__factory;
-}());
+    }
+}
 exports.IPriceOracle__factory = IPriceOracle__factory;
+IPriceOracle__factory.abi = _abi;

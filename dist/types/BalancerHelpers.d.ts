@@ -17,12 +17,12 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface BalancerHelpersInterface extends ethers.utils.Interface {
   functions: {
-    "queryExit(bytes32,address,address,tuple)": FunctionFragment;
-    "queryJoin(bytes32,address,address,tuple)": FunctionFragment;
+    "queryExit(bytes32,address,address,(address[],uint256[],bytes,bool))": FunctionFragment;
+    "queryJoin(bytes32,address,address,(address[],uint256[],bytes,bool))": FunctionFragment;
     "vault()": FunctionFragment;
   };
 

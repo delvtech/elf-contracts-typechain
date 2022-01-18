@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VaultAuthorization__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         anonymous: false,
         inputs: [
@@ -1154,16 +1154,13 @@ var _abi = [
         type: "function",
     },
 ];
-var VaultAuthorization__factory = /** @class */ (function () {
-    function VaultAuthorization__factory() {
-    }
-    VaultAuthorization__factory.createInterface = function () {
+class VaultAuthorization__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    VaultAuthorization__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    VaultAuthorization__factory.abi = _abi;
-    return VaultAuthorization__factory;
-}());
+    }
+}
 exports.VaultAuthorization__factory = VaultAuthorization__factory;
+VaultAuthorization__factory.abi = _abi;

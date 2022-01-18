@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { WeightedPoolFactory, WeightedPoolFactoryInterface } from "../WeightedPoolFactory";
 export declare class WeightedPoolFactory__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(vault: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<WeightedPoolFactory>;

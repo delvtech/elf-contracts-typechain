@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { WBTC, WBTCInterface } from "../WBTC";
 export declare class WBTC__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<WBTC>;

@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { StablePoolFactory, StablePoolFactoryInterface } from "../StablePoolFactory";
 export declare class StablePoolFactory__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(vault: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<StablePoolFactory>;

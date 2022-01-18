@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { EnumerableIERC20ToBytes32MapMock, EnumerableIERC20ToBytes32MapMockInterface } from "../EnumerableIERC20ToBytes32MapMock";
 export declare class EnumerableIERC20ToBytes32MapMock__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<EnumerableIERC20ToBytes32MapMock>;

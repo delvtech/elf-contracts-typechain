@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IERC20Decimals__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         anonymous: false,
         inputs: [
@@ -203,16 +203,13 @@ var _abi = [
         type: "function",
     },
 ];
-var IERC20Decimals__factory = /** @class */ (function () {
-    function IERC20Decimals__factory() {
-    }
-    IERC20Decimals__factory.createInterface = function () {
+class IERC20Decimals__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IERC20Decimals__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IERC20Decimals__factory.abi = _abi;
-    return IERC20Decimals__factory;
-}());
+    }
+}
 exports.IERC20Decimals__factory = IERC20Decimals__factory;
+IERC20Decimals__factory.abi = _abi;

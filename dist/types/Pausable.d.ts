@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface PausableInterface extends ethers.utils.Interface {
   functions: {
@@ -67,6 +67,18 @@ interface PausableInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "OwnershipRenounced"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
+
+export type PauseEvent = TypedEvent<[] & {}>;
+
+export type UnpauseEvent = TypedEvent<[] & {}>;
+
+export type OwnershipRenouncedEvent = TypedEvent<
+  [string] & { previousOwner: string }
+>;
+
+export type OwnershipTransferredEvent = TypedEvent<
+  [string, string] & { previousOwner: string; newOwner: string }
+>;
 
 export class Pausable extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -173,13 +185,29 @@ export class Pausable extends BaseContract {
   };
 
   filters: {
+    "Pause()"(): TypedEventFilter<[], {}>;
+
     Pause(): TypedEventFilter<[], {}>;
 
+    "Unpause()"(): TypedEventFilter<[], {}>;
+
     Unpause(): TypedEventFilter<[], {}>;
+
+    "OwnershipRenounced(address)"(
+      previousOwner?: string | null
+    ): TypedEventFilter<[string], { previousOwner: string }>;
 
     OwnershipRenounced(
       previousOwner?: string | null
     ): TypedEventFilter<[string], { previousOwner: string }>;
+
+    "OwnershipTransferred(address,address)"(
+      previousOwner?: string | null,
+      newOwner?: string | null
+    ): TypedEventFilter<
+      [string, string],
+      { previousOwner: string; newOwner: string }
+    >;
 
     OwnershipTransferred(
       previousOwner?: string | null,

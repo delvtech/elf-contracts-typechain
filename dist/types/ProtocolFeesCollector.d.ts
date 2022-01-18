@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface ProtocolFeesCollectorInterface extends ethers.utils.Interface {
   functions: {
@@ -110,6 +110,14 @@ interface ProtocolFeesCollectorInterface extends ethers.utils.Interface {
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SwapFeePercentageChanged"): EventFragment;
 }
+
+export type FlashLoanFeePercentageChangedEvent = TypedEvent<
+  [BigNumber] & { newFlashLoanFeePercentage: BigNumber }
+>;
+
+export type SwapFeePercentageChangedEvent = TypedEvent<
+  [BigNumber] & { newSwapFeePercentage: BigNumber }
+>;
 
 export class ProtocolFeesCollector extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -261,9 +269,17 @@ export class ProtocolFeesCollector extends BaseContract {
   };
 
   filters: {
+    "FlashLoanFeePercentageChanged(uint256)"(
+      newFlashLoanFeePercentage?: null
+    ): TypedEventFilter<[BigNumber], { newFlashLoanFeePercentage: BigNumber }>;
+
     FlashLoanFeePercentageChanged(
       newFlashLoanFeePercentage?: null
     ): TypedEventFilter<[BigNumber], { newFlashLoanFeePercentage: BigNumber }>;
+
+    "SwapFeePercentageChanged(uint256)"(
+      newSwapFeePercentage?: null
+    ): TypedEventFilter<[BigNumber], { newSwapFeePercentage: BigNumber }>;
 
     SwapFeePercentageChanged(
       newSwapFeePercentage?: null

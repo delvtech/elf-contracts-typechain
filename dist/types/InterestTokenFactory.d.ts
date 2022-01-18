@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface InterestTokenFactoryInterface extends ethers.utils.Interface {
   functions: {
@@ -40,6 +40,10 @@ interface InterestTokenFactoryInterface extends ethers.utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: "InterestTokenCreated"): EventFragment;
 }
+
+export type InterestTokenCreatedEvent = TypedEvent<
+  [string, string] & { token: string; tranche: string }
+>;
 
 export class InterestTokenFactory extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -113,6 +117,11 @@ export class InterestTokenFactory extends BaseContract {
   };
 
   filters: {
+    "InterestTokenCreated(address,address)"(
+      token?: string | null,
+      tranche?: string | null
+    ): TypedEventFilter<[string, string], { token: string; tranche: string }>;
+
     InterestTokenCreated(
       token?: string | null,
       tranche?: string | null

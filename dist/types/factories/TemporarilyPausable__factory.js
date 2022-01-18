@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TemporarilyPausable__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         anonymous: false,
         inputs: [
@@ -43,16 +43,13 @@ var _abi = [
         type: "function",
     },
 ];
-var TemporarilyPausable__factory = /** @class */ (function () {
-    function TemporarilyPausable__factory() {
-    }
-    TemporarilyPausable__factory.createInterface = function () {
+class TemporarilyPausable__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    TemporarilyPausable__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    TemporarilyPausable__factory.abi = _abi;
-    return TemporarilyPausable__factory;
-}());
+    }
+}
 exports.TemporarilyPausable__factory = TemporarilyPausable__factory;
+TemporarilyPausable__factory.abi = _abi;

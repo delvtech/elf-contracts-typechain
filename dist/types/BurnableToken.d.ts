@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface BurnableTokenInterface extends ethers.utils.Interface {
   functions: {
@@ -54,6 +54,14 @@ interface BurnableTokenInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Burn"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
+
+export type BurnEvent = TypedEvent<
+  [string, BigNumber] & { burner: string; value: BigNumber }
+>;
+
+export type TransferEvent = TypedEvent<
+  [string, string, BigNumber] & { from: string; to: string; value: BigNumber }
+>;
 
 export class BurnableToken extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -145,12 +153,29 @@ export class BurnableToken extends BaseContract {
   };
 
   filters: {
+    "Burn(address,uint256)"(
+      burner?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, BigNumber],
+      { burner: string; value: BigNumber }
+    >;
+
     Burn(
       burner?: string | null,
       value?: null
     ): TypedEventFilter<
       [string, BigNumber],
       { burner: string; value: BigNumber }
+    >;
+
+    "Transfer(address,address,uint256)"(
+      from?: string | null,
+      to?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
     >;
 
     Transfer(

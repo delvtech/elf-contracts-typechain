@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { BalancerErrorsMock, BalancerErrorsMockInterface } from "../BalancerErrorsMock";
 export declare class BalancerErrorsMock__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<BalancerErrorsMock>;

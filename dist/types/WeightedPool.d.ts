@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface WeightedPoolInterface extends ethers.utils.Interface {
   functions: {
@@ -43,7 +43,7 @@ interface WeightedPoolInterface extends ethers.utils.Interface {
     "nonces(address)": FunctionFragment;
     "onExitPool(bytes32,address,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
     "onJoinPool(bytes32,address,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
-    "onSwap(tuple,uint256,uint256)": FunctionFragment;
+    "onSwap((uint8,address,address,uint256,bytes32,uint256,address,address,bytes),uint256,uint256)": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "queryExit(bytes32,address,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
     "queryJoin(bytes32,address,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
@@ -292,6 +292,26 @@ interface WeightedPoolInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "SwapFeePercentageChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
+
+export type ApprovalEvent = TypedEvent<
+  [string, string, BigNumber] & {
+    owner: string;
+    spender: string;
+    value: BigNumber;
+  }
+>;
+
+export type PausedStateChangedEvent = TypedEvent<
+  [boolean] & { paused: boolean }
+>;
+
+export type SwapFeePercentageChangedEvent = TypedEvent<
+  [BigNumber] & { swapFeePercentage: BigNumber }
+>;
+
+export type TransferEvent = TypedEvent<
+  [string, string, BigNumber] & { from: string; to: string; value: BigNumber }
+>;
 
 export class WeightedPool extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -837,6 +857,15 @@ export class WeightedPool extends BaseContract {
   };
 
   filters: {
+    "Approval(address,address,uint256)"(
+      owner?: string | null,
+      spender?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { owner: string; spender: string; value: BigNumber }
+    >;
+
     Approval(
       owner?: string | null,
       spender?: string | null,
@@ -846,13 +875,30 @@ export class WeightedPool extends BaseContract {
       { owner: string; spender: string; value: BigNumber }
     >;
 
+    "PausedStateChanged(bool)"(
+      paused?: null
+    ): TypedEventFilter<[boolean], { paused: boolean }>;
+
     PausedStateChanged(
       paused?: null
     ): TypedEventFilter<[boolean], { paused: boolean }>;
 
+    "SwapFeePercentageChanged(uint256)"(
+      swapFeePercentage?: null
+    ): TypedEventFilter<[BigNumber], { swapFeePercentage: BigNumber }>;
+
     SwapFeePercentageChanged(
       swapFeePercentage?: null
     ): TypedEventFilter<[BigNumber], { swapFeePercentage: BigNumber }>;
+
+    "Transfer(address,address,uint256)"(
+      from?: string | null,
+      to?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
+    >;
 
     Transfer(
       from?: string | null,

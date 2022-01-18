@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ERC20PermitWithSupply__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         anonymous: false,
         inputs: [
@@ -317,16 +317,13 @@ var _abi = [
         type: "function",
     },
 ];
-var ERC20PermitWithSupply__factory = /** @class */ (function () {
-    function ERC20PermitWithSupply__factory() {
-    }
-    ERC20PermitWithSupply__factory.createInterface = function () {
+class ERC20PermitWithSupply__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ERC20PermitWithSupply__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ERC20PermitWithSupply__factory.abi = _abi;
-    return ERC20PermitWithSupply__factory;
-}());
+    }
+}
 exports.ERC20PermitWithSupply__factory = ERC20PermitWithSupply__factory;
+ERC20PermitWithSupply__factory.abi = _abi;

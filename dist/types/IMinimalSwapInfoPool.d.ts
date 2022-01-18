@@ -17,13 +17,13 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface IMinimalSwapInfoPoolInterface extends ethers.utils.Interface {
   functions: {
     "onExitPool(bytes32,address,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
     "onJoinPool(bytes32,address,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
-    "onSwap(tuple,uint256,uint256)": FunctionFragment;
+    "onSwap((uint8,address,address,uint256,bytes32,uint256,address,address,bytes),uint256,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(

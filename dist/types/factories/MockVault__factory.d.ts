@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MockVault, MockVaultInterface } from "../MockVault";
 export declare class MockVault__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(authorizer: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MockVault>;

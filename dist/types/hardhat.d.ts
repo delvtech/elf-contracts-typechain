@@ -13,6 +13,10 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "ERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20__factory>;
+    getContractFactory(
       name: "ERC20Permit",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20Permit__factory>;
@@ -21,9 +25,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC20Permit__factory>;
     getContractFactory(
-      name: "ERC20",
+      name: "IERC20Metadata",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC20__factory>;
+    ): Promise<Contracts.IERC20Metadata__factory>;
     getContractFactory(
       name: "IERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -381,6 +385,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ITrancheFactory__factory>;
     getContractFactory(
+      name: "IVault",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IVault__factory>;
+    getContractFactory(
       name: "IWETH",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IWETH__factory>;
@@ -449,6 +457,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TestYVault__factory>;
     getContractFactory(
+      name: "TestYVaultV4",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TestYVaultV4__factory>;
+    getContractFactory(
       name: "Tranche",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Tranche__factory>;
@@ -464,6 +476,14 @@ declare module "hardhat/types/runtime" {
       name: "YVaultAssetProxy",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.YVaultAssetProxy__factory>;
+    getContractFactory(
+      name: "YVaultV4AssetProxy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.YVaultV4AssetProxy__factory>;
+    getContractFactory(
+      name: "ZapCurveTokenToPrincipalToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ZapCurveTokenToPrincipalToken__factory>;
     getContractFactory(
       name: "ZapTrancheHop",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -557,6 +577,712 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.WETH__factory>;
 
+    getContractAt(
+      name: "ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20>;
+    getContractAt(
+      name: "ERC20Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20Permit>;
+    getContractAt(
+      name: "IERC20Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Permit>;
+    getContractAt(
+      name: "IERC20Metadata",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Metadata>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "Authentication",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Authentication>;
+    getContractAt(
+      name: "BalancerHelpers",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BalancerHelpers>;
+    getContractAt(
+      name: "IAuthentication",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IAuthentication>;
+    getContractAt(
+      name: "ISignaturesValidator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISignaturesValidator>;
+    getContractAt(
+      name: "ITemporarilyPausable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITemporarilyPausable>;
+    getContractAt(
+      name: "SignaturesValidator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SignaturesValidator>;
+    getContractAt(
+      name: "TemporarilyPausable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TemporarilyPausable>;
+    getContractAt(
+      name: "AccessControl",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AccessControl>;
+    getContractAt(
+      name: "ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20>;
+    getContractAt(
+      name: "ERC20Burnable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20Burnable>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IERC20Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Permit>;
+    getContractAt(
+      name: "BalancerPoolToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BalancerPoolToken>;
+    getContractAt(
+      name: "BaseGeneralPool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseGeneralPool>;
+    getContractAt(
+      name: "BaseMinimalSwapInfoPool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BaseMinimalSwapInfoPool>;
+    getContractAt(
+      name: "BasePool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BasePool>;
+    getContractAt(
+      name: "BasePoolAuthorization",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BasePoolAuthorization>;
+    getContractAt(
+      name: "BasePoolFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BasePoolFactory>;
+    getContractAt(
+      name: "FactoryWidePauseWindow",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.FactoryWidePauseWindow>;
+    getContractAt(
+      name: "IPriceOracle",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IPriceOracle>;
+    getContractAt(
+      name: "IWeightedPoolPriceOracle",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IWeightedPoolPriceOracle>;
+    getContractAt(
+      name: "PoolPriceOracle",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PoolPriceOracle>;
+    getContractAt(
+      name: "StablePool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StablePool>;
+    getContractAt(
+      name: "StablePoolFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StablePoolFactory>;
+    getContractAt(
+      name: "WeightedPool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WeightedPool>;
+    getContractAt(
+      name: "WeightedPool2Tokens",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WeightedPool2Tokens>;
+    getContractAt(
+      name: "WeightedPool2TokensFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WeightedPool2TokensFactory>;
+    getContractAt(
+      name: "WeightedPoolFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WeightedPoolFactory>;
+    getContractAt(
+      name: "BalanceAllocationMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BalanceAllocationMock>;
+    getContractAt(
+      name: "EthForceSender",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.EthForceSender>;
+    getContractAt(
+      name: "BalancerErrorsMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BalancerErrorsMock>;
+    getContractAt(
+      name: "EnumerableIERC20ToBytes32MapMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.EnumerableIERC20ToBytes32MapMock>;
+    getContractAt(
+      name: "ReentrancyAttack",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ReentrancyAttack>;
+    getContractAt(
+      name: "ReentrancyMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ReentrancyMock>;
+    getContractAt(
+      name: "SignaturesValidatorMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SignaturesValidatorMock>;
+    getContractAt(
+      name: "TemporarilyPausableMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TemporarilyPausableMock>;
+    getContractAt(
+      name: "MockAssetTransfersHandler",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockAssetTransfersHandler>;
+    getContractAt(
+      name: "MockBalancerPoolToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockBalancerPoolToken>;
+    getContractAt(
+      name: "MockBasePool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockBasePool>;
+    getContractAt(
+      name: "MockFlashLoanRecipient",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockFlashLoanRecipient>;
+    getContractAt(
+      name: "MockInternalBalanceRelayer",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockInternalBalanceRelayer>;
+    getContractAt(
+      name: "MockPool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockPool>;
+    getContractAt(
+      name: "MockFactoryCreatedPool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockFactoryCreatedPool>;
+    getContractAt(
+      name: "MockPoolFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockPoolFactory>;
+    getContractAt(
+      name: "MockStableMath",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockStableMath>;
+    getContractAt(
+      name: "MockVault",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockVault>;
+    getContractAt(
+      name: "MockWeightedMath",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockWeightedMath>;
+    getContractAt(
+      name: "MockWeightedOracleMath",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockWeightedOracleMath>;
+    getContractAt(
+      name: "Multicall",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Multicall>;
+    getContractAt(
+      name: "PoolPriceOracleMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PoolPriceOracleMock>;
+    getContractAt(
+      name: "TestToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TestToken>;
+    getContractAt(
+      name: "TokenFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TokenFactory>;
+    getContractAt(
+      name: "WeightedPool2TokensMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WeightedPool2TokensMock>;
+    getContractAt(
+      name: "WETH",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WETH>;
+    getContractAt(
+      name: "AssetManagers",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetManagers>;
+    getContractAt(
+      name: "AssetTransfersHandler",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AssetTransfersHandler>;
+    getContractAt(
+      name: "Authorizer",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Authorizer>;
+    getContractAt(
+      name: "MinimalSwapInfoPoolsBalance",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MinimalSwapInfoPoolsBalance>;
+    getContractAt(
+      name: "TwoTokenPoolsBalance",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TwoTokenPoolsBalance>;
+    getContractAt(
+      name: "Fees",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Fees>;
+    getContractAt(
+      name: "FlashLoans",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.FlashLoans>;
+    getContractAt(
+      name: "IAuthorizer",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IAuthorizer>;
+    getContractAt(
+      name: "IBasePool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IBasePool>;
+    getContractAt(
+      name: "IFlashLoanRecipient",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IFlashLoanRecipient>;
+    getContractAt(
+      name: "IGeneralPool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IGeneralPool>;
+    getContractAt(
+      name: "IMinimalSwapInfoPool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IMinimalSwapInfoPool>;
+    getContractAt(
+      name: "IVault",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IVault>;
+    getContractAt(
+      name: "IWETH",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IWETH>;
+    getContractAt(
+      name: "PoolBalances",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PoolBalances>;
+    getContractAt(
+      name: "PoolRegistry",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PoolRegistry>;
+    getContractAt(
+      name: "PoolTokens",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PoolTokens>;
+    getContractAt(
+      name: "ProtocolFeesCollector",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ProtocolFeesCollector>;
+    getContractAt(
+      name: "Swaps",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Swaps>;
+    getContractAt(
+      name: "UserBalance",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UserBalance>;
+    getContractAt(
+      name: "Vault",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Vault>;
+    getContractAt(
+      name: "VaultAuthorization",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.VaultAuthorization>;
+    getContractAt(
+      name: "ConvergentCurvePool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ConvergentCurvePool>;
+    getContractAt(
+      name: "ConvergentPoolFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ConvergentPoolFactory>;
+    getContractAt(
+      name: "InterestTokenFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.InterestTokenFactory>;
+    getContractAt(
+      name: "TrancheFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TrancheFactory>;
+    getContractAt(
+      name: "InterestToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.InterestToken>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IERC20Decimals",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Decimals>;
+    getContractAt(
+      name: "IERC20Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Permit>;
+    getContractAt(
+      name: "IInterestToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IInterestToken>;
+    getContractAt(
+      name: "IInterestTokenFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IInterestTokenFactory>;
+    getContractAt(
+      name: "ITranche",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITranche>;
+    getContractAt(
+      name: "ITrancheFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ITrancheFactory>;
+    getContractAt(
+      name: "IVault",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IVault>;
+    getContractAt(
+      name: "IWETH",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IWETH>;
+    getContractAt(
+      name: "IWrappedPosition",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IWrappedPosition>;
+    getContractAt(
+      name: "IYearnVault",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IYearnVault>;
+    getContractAt(
+      name: "Authorizable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Authorizable>;
+    getContractAt(
+      name: "DateString",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DateString>;
+    getContractAt(
+      name: "ERC20Permit",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20Permit>;
+    getContractAt(
+      name: "ERC20PermitWithSupply",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20PermitWithSupply>;
+    getContractAt(
+      name: "CodeSizeChecker",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CodeSizeChecker>;
+    getContractAt(
+      name: "MockERC20YearnVault",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MockERC20YearnVault>;
+    getContractAt(
+      name: "TestConvergentCurvePool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TestConvergentCurvePool>;
+    getContractAt(
+      name: "TestDate",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TestDate>;
+    getContractAt(
+      name: "TestERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TestERC20>;
+    getContractAt(
+      name: "TestEthSender",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TestEthSender>;
+    getContractAt(
+      name: "TestUserProxy",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TestUserProxy>;
+    getContractAt(
+      name: "TestVault",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TestVault>;
+    getContractAt(
+      name: "TestWrappedPosition",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TestWrappedPosition>;
+    getContractAt(
+      name: "TestYVault",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TestYVault>;
+    getContractAt(
+      name: "TestYVaultV4",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TestYVaultV4>;
+    getContractAt(
+      name: "Tranche",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Tranche>;
+    getContractAt(
+      name: "UserProxy",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.UserProxy>;
+    getContractAt(
+      name: "WrappedPosition",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WrappedPosition>;
+    getContractAt(
+      name: "YVaultAssetProxy",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.YVaultAssetProxy>;
+    getContractAt(
+      name: "YVaultV4AssetProxy",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.YVaultV4AssetProxy>;
+    getContractAt(
+      name: "ZapCurveTokenToPrincipalToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ZapCurveTokenToPrincipalToken>;
+    getContractAt(
+      name: "ZapTrancheHop",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ZapTrancheHop>;
+    getContractAt(
+      name: "ZapYearnShares",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ZapYearnShares>;
+    getContractAt(
+      name: "CurveStethPool",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CurveStethPool>;
+    getContractAt(
+      name: "CurveContract",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CurveContract>;
+    getContractAt(
+      name: "DAI",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DAI>;
+    getContractAt(
+      name: "ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20>;
+    getContractAt(
+      name: "LUSD",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.LUSD>;
+    getContractAt(
+      name: "USDC",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.USDC>;
+    getContractAt(
+      name: "BasicToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BasicToken>;
+    getContractAt(
+      name: "BurnableToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.BurnableToken>;
+    getContractAt(
+      name: "CanReclaimToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CanReclaimToken>;
+    getContractAt(
+      name: "Claimable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Claimable>;
+    getContractAt(
+      name: "DetailedERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DetailedERC20>;
+    getContractAt(
+      name: "ERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20>;
+    getContractAt(
+      name: "ERC20Basic",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20Basic>;
+    getContractAt(
+      name: "MintableToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MintableToken>;
+    getContractAt(
+      name: "Ownable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Ownable>;
+    getContractAt(
+      name: "OwnableContract",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.OwnableContract>;
+    getContractAt(
+      name: "Pausable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Pausable>;
+    getContractAt(
+      name: "PausableToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.PausableToken>;
+    getContractAt(
+      name: "StandardToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.StandardToken>;
+    getContractAt(
+      name: "WBTC",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WBTC>;
+    getContractAt(
+      name: "WETH",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WETH>;
+
     // default types
     getContractFactory(
       name: string,
@@ -567,5 +1293,10 @@ declare module "hardhat/types/runtime" {
       bytecode: ethers.utils.BytesLike,
       signer?: ethers.Signer
     ): Promise<ethers.ContractFactory>;
+    getContractAt(
+      nameOrAbi: string | any[],
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<ethers.Contract>;
   }
 }

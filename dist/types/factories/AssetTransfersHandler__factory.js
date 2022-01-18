@@ -4,23 +4,20 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AssetTransfersHandler__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         stateMutability: "payable",
         type: "receive",
     },
 ];
-var AssetTransfersHandler__factory = /** @class */ (function () {
-    function AssetTransfersHandler__factory() {
-    }
-    AssetTransfersHandler__factory.createInterface = function () {
+class AssetTransfersHandler__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    AssetTransfersHandler__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    AssetTransfersHandler__factory.abi = _abi;
-    return AssetTransfersHandler__factory;
-}());
+    }
+}
 exports.AssetTransfersHandler__factory = AssetTransfersHandler__factory;
+AssetTransfersHandler__factory.abi = _abi;

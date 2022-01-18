@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { ReentrancyMock, ReentrancyMockInterface } from "../ReentrancyMock";
 export declare class ReentrancyMock__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ReentrancyMock>;

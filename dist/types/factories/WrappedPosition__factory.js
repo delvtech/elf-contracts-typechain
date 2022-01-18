@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WrappedPosition__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         anonymous: false,
         inputs: [
@@ -471,16 +471,13 @@ var _abi = [
         type: "function",
     },
 ];
-var WrappedPosition__factory = /** @class */ (function () {
-    function WrappedPosition__factory() {
-    }
-    WrappedPosition__factory.createInterface = function () {
+class WrappedPosition__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    WrappedPosition__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    WrappedPosition__factory.abi = _abi;
-    return WrappedPosition__factory;
-}());
+    }
+}
 exports.WrappedPosition__factory = WrappedPosition__factory;
+WrappedPosition__factory.abi = _abi;

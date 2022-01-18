@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IYearnVault__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         anonymous: false,
         inputs: [
@@ -75,6 +75,19 @@ var _abi = [
                 internalType: "uint256",
                 name: "",
                 type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+    },
+    {
+        inputs: [],
+        name: "apiVersion",
+        outputs: [
+            {
+                internalType: "string",
+                name: "",
+                type: "string",
             },
         ],
         stateMutability: "view",
@@ -321,16 +334,13 @@ var _abi = [
         type: "function",
     },
 ];
-var IYearnVault__factory = /** @class */ (function () {
-    function IYearnVault__factory() {
-    }
-    IYearnVault__factory.createInterface = function () {
+class IYearnVault__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IYearnVault__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IYearnVault__factory.abi = _abi;
-    return IYearnVault__factory;
-}());
+    }
+}
 exports.IYearnVault__factory = IYearnVault__factory;
+IYearnVault__factory.abi = _abi;

@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface TestConvergentCurvePoolInterface extends ethers.utils.Interface {
   functions: {
@@ -48,14 +48,14 @@ interface TestConvergentCurvePoolInterface extends ethers.utils.Interface {
     "normalize(uint256,uint8,uint8)": FunctionFragment;
     "onExitPool(bytes32,address,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
     "onJoinPool(bytes32,address,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
-    "onSwap(tuple,uint256,uint256)": FunctionFragment;
+    "onSwap((uint8,address,address,uint256,bytes32,uint256,address,address,bytes),uint256,uint256)": FunctionFragment;
     "percentFee()": FunctionFragment;
     "percentFeeGov()": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "setFees(uint128,uint128)": FunctionFragment;
     "setLPBalance(address,uint256)": FunctionFragment;
     "solveTradeInvariant(uint256,uint256,uint256,bool)": FunctionFragment;
-    "swapSimulation(tuple,uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
+    "swapSimulation((uint8,address,address,uint256,bytes32,uint256,address,address,bytes),uint256,uint256,uint256,uint256,uint256)": FunctionFragment;
     "symbol()": FunctionFragment;
     "time()": FunctionFragment;
     "tokenToFixed(uint256,address)": FunctionFragment;
@@ -374,6 +374,29 @@ interface TestConvergentCurvePoolInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "UIntReturn"): EventFragment;
 }
+
+export type ApprovalEvent = TypedEvent<
+  [string, string, BigNumber] & {
+    owner: string;
+    spender: string;
+    value: BigNumber;
+  }
+>;
+
+export type FeeCollectionEvent = TypedEvent<
+  [BigNumber, BigNumber, BigNumber, BigNumber] & {
+    collectedBase: BigNumber;
+    collectedBond: BigNumber;
+    remainingBase: BigNumber;
+    remainingBond: BigNumber;
+  }
+>;
+
+export type TransferEvent = TypedEvent<
+  [string, string, BigNumber] & { from: string; to: string; value: BigNumber }
+>;
+
+export type UIntReturnEvent = TypedEvent<[BigNumber] & { data: BigNumber }>;
 
 export class TestConvergentCurvePool extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -1096,6 +1119,15 @@ export class TestConvergentCurvePool extends BaseContract {
   };
 
   filters: {
+    "Approval(address,address,uint256)"(
+      owner?: string | null,
+      spender?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { owner: string; spender: string; value: BigNumber }
+    >;
+
     Approval(
       owner?: string | null,
       spender?: string | null,
@@ -1103,6 +1135,21 @@ export class TestConvergentCurvePool extends BaseContract {
     ): TypedEventFilter<
       [string, string, BigNumber],
       { owner: string; spender: string; value: BigNumber }
+    >;
+
+    "FeeCollection(uint256,uint256,uint256,uint256)"(
+      collectedBase?: null,
+      collectedBond?: null,
+      remainingBase?: null,
+      remainingBond?: null
+    ): TypedEventFilter<
+      [BigNumber, BigNumber, BigNumber, BigNumber],
+      {
+        collectedBase: BigNumber;
+        collectedBond: BigNumber;
+        remainingBase: BigNumber;
+        remainingBond: BigNumber;
+      }
     >;
 
     FeeCollection(
@@ -1120,6 +1167,15 @@ export class TestConvergentCurvePool extends BaseContract {
       }
     >;
 
+    "Transfer(address,address,uint256)"(
+      from?: string | null,
+      to?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
+    >;
+
     Transfer(
       from?: string | null,
       to?: string | null,
@@ -1128,6 +1184,10 @@ export class TestConvergentCurvePool extends BaseContract {
       [string, string, BigNumber],
       { from: string; to: string; value: BigNumber }
     >;
+
+    "UIntReturn(uint256)"(
+      data?: null
+    ): TypedEventFilter<[BigNumber], { data: BigNumber }>;
 
     UIntReturn(data?: null): TypedEventFilter<[BigNumber], { data: BigNumber }>;
   };

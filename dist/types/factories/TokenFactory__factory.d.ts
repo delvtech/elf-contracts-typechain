@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { TokenFactory, TokenFactoryInterface } from "../TokenFactory";
 export declare class TokenFactory__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<TokenFactory>;

@@ -17,11 +17,12 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface IYearnVaultInterface extends ethers.utils.Interface {
   functions: {
     "allowance(address,address)": FunctionFragment;
+    "apiVersion()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "decimals()": FunctionFragment;
@@ -40,6 +41,10 @@ interface IYearnVaultInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "allowance",
     values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "apiVersion",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -86,6 +91,7 @@ interface IYearnVaultInterface extends ethers.utils.Interface {
   ): string;
 
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "apiVersion", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
@@ -123,6 +129,18 @@ interface IYearnVaultInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
+
+export type ApprovalEvent = TypedEvent<
+  [string, string, BigNumber] & {
+    owner: string;
+    spender: string;
+    value: BigNumber;
+  }
+>;
+
+export type TransferEvent = TypedEvent<
+  [string, string, BigNumber] & { from: string; to: string; value: BigNumber }
+>;
 
 export class IYearnVault extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -173,6 +191,8 @@ export class IYearnVault extends BaseContract {
       spender: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    apiVersion(overrides?: CallOverrides): Promise<[string]>;
 
     approve(
       spender: string,
@@ -232,6 +252,8 @@ export class IYearnVault extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  apiVersion(overrides?: CallOverrides): Promise<string>;
+
   approve(
     spender: string,
     amount: BigNumberish,
@@ -290,6 +312,8 @@ export class IYearnVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    apiVersion(overrides?: CallOverrides): Promise<string>;
+
     approve(
       spender: string,
       amount: BigNumberish,
@@ -343,6 +367,15 @@ export class IYearnVault extends BaseContract {
   };
 
   filters: {
+    "Approval(address,address,uint256)"(
+      owner?: string | null,
+      spender?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { owner: string; spender: string; value: BigNumber }
+    >;
+
     Approval(
       owner?: string | null,
       spender?: string | null,
@@ -350,6 +383,15 @@ export class IYearnVault extends BaseContract {
     ): TypedEventFilter<
       [string, string, BigNumber],
       { owner: string; spender: string; value: BigNumber }
+    >;
+
+    "Transfer(address,address,uint256)"(
+      from?: string | null,
+      to?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
     >;
 
     Transfer(
@@ -368,6 +410,8 @@ export class IYearnVault extends BaseContract {
       spender: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    apiVersion(overrides?: CallOverrides): Promise<BigNumber>;
 
     approve(
       spender: string,
@@ -427,6 +471,8 @@ export class IYearnVault extends BaseContract {
       spender: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    apiVersion(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     approve(
       spender: string,

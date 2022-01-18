@@ -2,7 +2,7 @@ import { Signer, ContractFactory, PayableOverrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { EthForceSender, EthForceSenderInterface } from "../EthForceSender";
 export declare class EthForceSender__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(recipient: string, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<EthForceSender>;

@@ -17,13 +17,14 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface TestYVaultInterface extends ethers.utils.Interface {
   functions: {
     "DOMAIN_SEPARATOR()": FunctionFragment;
     "PERMIT_TYPEHASH()": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
+    "apiVersion()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "decimals()": FunctionFragment;
@@ -55,6 +56,10 @@ interface TestYVaultInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "allowance",
     values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "apiVersion",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -128,6 +133,7 @@ interface TestYVaultInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "apiVersion", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decimals", data: BytesLike): Result;
@@ -173,6 +179,18 @@ interface TestYVaultInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
+
+export type ApprovalEvent = TypedEvent<
+  [string, string, BigNumber] & {
+    owner: string;
+    spender: string;
+    value: BigNumber;
+  }
+>;
+
+export type TransferEvent = TypedEvent<
+  [string, string, BigNumber] & { from: string; to: string; value: BigNumber }
+>;
 
 export class TestYVault extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -227,6 +245,8 @@ export class TestYVault extends BaseContract {
       arg1: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    apiVersion(overrides?: CallOverrides): Promise<[string]>;
 
     approve(
       account: string,
@@ -311,6 +331,8 @@ export class TestYVault extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  apiVersion(overrides?: CallOverrides): Promise<string>;
+
   approve(
     account: string,
     amount: BigNumberish,
@@ -391,6 +413,8 @@ export class TestYVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    apiVersion(overrides?: CallOverrides): Promise<string>;
+
     approve(
       account: string,
       amount: BigNumberish,
@@ -463,6 +487,15 @@ export class TestYVault extends BaseContract {
   };
 
   filters: {
+    "Approval(address,address,uint256)"(
+      owner?: string | null,
+      spender?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { owner: string; spender: string; value: BigNumber }
+    >;
+
     Approval(
       owner?: string | null,
       spender?: string | null,
@@ -470,6 +503,15 @@ export class TestYVault extends BaseContract {
     ): TypedEventFilter<
       [string, string, BigNumber],
       { owner: string; spender: string; value: BigNumber }
+    >;
+
+    "Transfer(address,address,uint256)"(
+      from?: string | null,
+      to?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
     >;
 
     Transfer(
@@ -492,6 +534,8 @@ export class TestYVault extends BaseContract {
       arg1: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    apiVersion(overrides?: CallOverrides): Promise<BigNumber>;
 
     approve(
       account: string,
@@ -576,6 +620,8 @@ export class TestYVault extends BaseContract {
       arg1: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    apiVersion(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     approve(
       account: string,

@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface ConvergentPoolFactoryInterface extends ethers.utils.Interface {
   functions: {
@@ -110,6 +110,12 @@ interface ConvergentPoolFactoryInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "CCPoolCreated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "PoolCreated"): EventFragment;
 }
+
+export type CCPoolCreatedEvent = TypedEvent<
+  [string, string] & { pool: string; bondToken: string }
+>;
+
+export type PoolCreatedEvent = TypedEvent<[string] & { pool: string }>;
 
 export class ConvergentPoolFactory extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -300,10 +306,19 @@ export class ConvergentPoolFactory extends BaseContract {
   };
 
   filters: {
+    "CCPoolCreated(address,address)"(
+      pool?: string | null,
+      bondToken?: string | null
+    ): TypedEventFilter<[string, string], { pool: string; bondToken: string }>;
+
     CCPoolCreated(
       pool?: string | null,
       bondToken?: string | null
     ): TypedEventFilter<[string, string], { pool: string; bondToken: string }>;
+
+    "PoolCreated(address)"(
+      pool?: string | null
+    ): TypedEventFilter<[string], { pool: string }>;
 
     PoolCreated(
       pool?: string | null

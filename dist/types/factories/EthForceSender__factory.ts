@@ -33,8 +33,14 @@ const _bytecode =
   "0x6080604052604051604e380380604e83398181016040526020811015602357600080fd5b81019080805190602001909291905050508073ffffffffffffffffffffffffffffffffffffffff16fffe";
 
 export class EthForceSender__factory extends ContractFactory {
-  constructor(signer?: Signer) {
-    super(_abi, _bytecode, signer);
+  constructor(
+    ...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>
+  ) {
+    if (args.length === 1) {
+      super(_abi, _bytecode, args[0]);
+    } else {
+      super(...args);
+    }
   }
 
   deploy(

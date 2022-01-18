@@ -2,7 +2,7 @@ import { Signer, BigNumberish, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { WeightedPool2TokensMock, WeightedPool2TokensMockInterface } from "../WeightedPool2TokensMock";
 export declare class WeightedPool2TokensMock__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(params: {
         vault: string;
         name: string;

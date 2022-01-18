@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MockBalancerPoolToken, MockBalancerPoolTokenInterface } from "../MockBalancerPoolToken";
 export declare class MockBalancerPoolToken__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(name: string, symbol: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MockBalancerPoolToken>;

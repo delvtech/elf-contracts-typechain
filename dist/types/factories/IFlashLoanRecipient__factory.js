@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IFlashLoanRecipient__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         inputs: [
             {
@@ -35,16 +35,13 @@ var _abi = [
         type: "function",
     },
 ];
-var IFlashLoanRecipient__factory = /** @class */ (function () {
-    function IFlashLoanRecipient__factory() {
-    }
-    IFlashLoanRecipient__factory.createInterface = function () {
+class IFlashLoanRecipient__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IFlashLoanRecipient__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IFlashLoanRecipient__factory.abi = _abi;
-    return IFlashLoanRecipient__factory;
-}());
+    }
+}
 exports.IFlashLoanRecipient__factory = IFlashLoanRecipient__factory;
+IFlashLoanRecipient__factory.abi = _abi;

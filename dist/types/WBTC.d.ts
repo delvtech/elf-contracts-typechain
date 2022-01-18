@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface WBTCInterface extends ethers.utils.Interface {
   functions: {
@@ -197,6 +197,40 @@ interface WBTCInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
+
+export type PauseEvent = TypedEvent<[] & {}>;
+
+export type UnpauseEvent = TypedEvent<[] & {}>;
+
+export type BurnEvent = TypedEvent<
+  [string, BigNumber] & { burner: string; value: BigNumber }
+>;
+
+export type MintEvent = TypedEvent<
+  [string, BigNumber] & { to: string; amount: BigNumber }
+>;
+
+export type MintFinishedEvent = TypedEvent<[] & {}>;
+
+export type OwnershipRenouncedEvent = TypedEvent<
+  [string] & { previousOwner: string }
+>;
+
+export type OwnershipTransferredEvent = TypedEvent<
+  [string, string] & { previousOwner: string; newOwner: string }
+>;
+
+export type ApprovalEvent = TypedEvent<
+  [string, string, BigNumber] & {
+    owner: string;
+    spender: string;
+    value: BigNumber;
+  }
+>;
+
+export type TransferEvent = TypedEvent<
+  [string, string, BigNumber] & { from: string; to: string; value: BigNumber }
+>;
 
 export class WBTC extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -518,9 +552,21 @@ export class WBTC extends BaseContract {
   };
 
   filters: {
+    "Pause()"(): TypedEventFilter<[], {}>;
+
     Pause(): TypedEventFilter<[], {}>;
 
+    "Unpause()"(): TypedEventFilter<[], {}>;
+
     Unpause(): TypedEventFilter<[], {}>;
+
+    "Burn(address,uint256)"(
+      burner?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, BigNumber],
+      { burner: string; value: BigNumber }
+    >;
 
     Burn(
       burner?: string | null,
@@ -530,16 +576,35 @@ export class WBTC extends BaseContract {
       { burner: string; value: BigNumber }
     >;
 
+    "Mint(address,uint256)"(
+      to?: string | null,
+      amount?: null
+    ): TypedEventFilter<[string, BigNumber], { to: string; amount: BigNumber }>;
+
     Mint(
       to?: string | null,
       amount?: null
     ): TypedEventFilter<[string, BigNumber], { to: string; amount: BigNumber }>;
 
+    "MintFinished()"(): TypedEventFilter<[], {}>;
+
     MintFinished(): TypedEventFilter<[], {}>;
+
+    "OwnershipRenounced(address)"(
+      previousOwner?: string | null
+    ): TypedEventFilter<[string], { previousOwner: string }>;
 
     OwnershipRenounced(
       previousOwner?: string | null
     ): TypedEventFilter<[string], { previousOwner: string }>;
+
+    "OwnershipTransferred(address,address)"(
+      previousOwner?: string | null,
+      newOwner?: string | null
+    ): TypedEventFilter<
+      [string, string],
+      { previousOwner: string; newOwner: string }
+    >;
 
     OwnershipTransferred(
       previousOwner?: string | null,
@@ -549,6 +614,15 @@ export class WBTC extends BaseContract {
       { previousOwner: string; newOwner: string }
     >;
 
+    "Approval(address,address,uint256)"(
+      owner?: string | null,
+      spender?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { owner: string; spender: string; value: BigNumber }
+    >;
+
     Approval(
       owner?: string | null,
       spender?: string | null,
@@ -556,6 +630,15 @@ export class WBTC extends BaseContract {
     ): TypedEventFilter<
       [string, string, BigNumber],
       { owner: string; spender: string; value: BigNumber }
+    >;
+
+    "Transfer(address,address,uint256)"(
+      from?: string | null,
+      to?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
     >;
 
     Transfer(

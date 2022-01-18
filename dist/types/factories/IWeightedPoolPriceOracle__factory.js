@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IWeightedPoolPriceOracle__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         inputs: [
             {
@@ -69,16 +69,13 @@ var _abi = [
         type: "function",
     },
 ];
-var IWeightedPoolPriceOracle__factory = /** @class */ (function () {
-    function IWeightedPoolPriceOracle__factory() {
-    }
-    IWeightedPoolPriceOracle__factory.createInterface = function () {
+class IWeightedPoolPriceOracle__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IWeightedPoolPriceOracle__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IWeightedPoolPriceOracle__factory.abi = _abi;
-    return IWeightedPoolPriceOracle__factory;
-}());
+    }
+}
 exports.IWeightedPoolPriceOracle__factory = IWeightedPoolPriceOracle__factory;
+IWeightedPoolPriceOracle__factory.abi = _abi;

@@ -2,25 +2,8 @@ import { Signer } from "ethers";
 import { Provider } from "@ethersproject/providers";
 import type { IVault, IVaultInterface } from "../IVault";
 export declare class IVault__factory {
-    static readonly abi: ({
-        anonymous: boolean;
-        inputs: {
-            indexed: boolean;
-            internalType: string;
-            name: string;
-            type: string;
-        }[];
-        name: string;
-        type: string;
-        outputs?: undefined;
-        stateMutability?: undefined;
-    } | {
+    static readonly abi: {
         inputs: ({
-            internalType: string;
-            name: string;
-            type: string;
-            components?: undefined;
-        } | {
             components: {
                 internalType: string;
                 name: string;
@@ -29,6 +12,11 @@ export declare class IVault__factory {
             internalType: string;
             name: string;
             type: string;
+        } | {
+            internalType: string;
+            name: string;
+            type: string;
+            components?: undefined;
         })[];
         name: string;
         outputs: {
@@ -38,8 +26,7 @@ export declare class IVault__factory {
         }[];
         stateMutability: string;
         type: string;
-        anonymous?: undefined;
-    })[];
+    }[];
     static createInterface(): IVaultInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): IVault;
 }

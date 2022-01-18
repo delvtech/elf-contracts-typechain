@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ERC20Permit__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         anonymous: false,
         inputs: [
@@ -70,28 +70,15 @@ var _abi = [
         type: "function",
     },
     {
-        inputs: [],
-        name: "PERMIT_TYPEHASH",
-        outputs: [
-            {
-                internalType: "bytes32",
-                name: "",
-                type: "bytes32",
-            },
-        ],
-        stateMutability: "view",
-        type: "function",
-    },
-    {
         inputs: [
             {
                 internalType: "address",
-                name: "",
+                name: "owner",
                 type: "address",
             },
             {
                 internalType: "address",
-                name: "",
+                name: "spender",
                 type: "address",
             },
         ],
@@ -110,7 +97,7 @@ var _abi = [
         inputs: [
             {
                 internalType: "address",
-                name: "account",
+                name: "spender",
                 type: "address",
             },
             {
@@ -134,7 +121,7 @@ var _abi = [
         inputs: [
             {
                 internalType: "address",
-                name: "",
+                name: "account",
                 type: "address",
             },
         ],
@@ -163,6 +150,54 @@ var _abi = [
         type: "function",
     },
     {
+        inputs: [
+            {
+                internalType: "address",
+                name: "spender",
+                type: "address",
+            },
+            {
+                internalType: "uint256",
+                name: "subtractedValue",
+                type: "uint256",
+            },
+        ],
+        name: "decreaseAllowance",
+        outputs: [
+            {
+                internalType: "bool",
+                name: "",
+                type: "bool",
+            },
+        ],
+        stateMutability: "nonpayable",
+        type: "function",
+    },
+    {
+        inputs: [
+            {
+                internalType: "address",
+                name: "spender",
+                type: "address",
+            },
+            {
+                internalType: "uint256",
+                name: "addedValue",
+                type: "uint256",
+            },
+        ],
+        name: "increaseAllowance",
+        outputs: [
+            {
+                internalType: "bool",
+                name: "",
+                type: "bool",
+            },
+        ],
+        stateMutability: "nonpayable",
+        type: "function",
+    },
+    {
         inputs: [],
         name: "name",
         outputs: [
@@ -179,7 +214,7 @@ var _abi = [
         inputs: [
             {
                 internalType: "address",
-                name: "",
+                name: "owner",
                 type: "address",
             },
         ],
@@ -251,6 +286,19 @@ var _abi = [
         type: "function",
     },
     {
+        inputs: [],
+        name: "totalSupply",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+    },
+    {
         inputs: [
             {
                 internalType: "address",
@@ -278,7 +326,7 @@ var _abi = [
         inputs: [
             {
                 internalType: "address",
-                name: "spender",
+                name: "sender",
                 type: "address",
             },
             {
@@ -304,16 +352,13 @@ var _abi = [
         type: "function",
     },
 ];
-var ERC20Permit__factory = /** @class */ (function () {
-    function ERC20Permit__factory() {
-    }
-    ERC20Permit__factory.createInterface = function () {
+class ERC20Permit__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ERC20Permit__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ERC20Permit__factory.abi = _abi;
-    return ERC20Permit__factory;
-}());
+    }
+}
 exports.ERC20Permit__factory = ERC20Permit__factory;
+ERC20Permit__factory.abi = _abi;

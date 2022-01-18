@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface ConvergentCurvePoolInterface extends ethers.utils.Interface {
   functions: {
@@ -41,7 +41,7 @@ interface ConvergentCurvePoolInterface extends ethers.utils.Interface {
     "nonces(address)": FunctionFragment;
     "onExitPool(bytes32,address,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
     "onJoinPool(bytes32,address,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
-    "onSwap(tuple,uint256,uint256)": FunctionFragment;
+    "onSwap((uint8,address,address,uint256,bytes32,uint256,address,address,bytes),uint256,uint256)": FunctionFragment;
     "percentFee()": FunctionFragment;
     "percentFeeGov()": FunctionFragment;
     "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
@@ -268,6 +268,27 @@ interface ConvergentCurvePoolInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "FeeCollection"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
+
+export type ApprovalEvent = TypedEvent<
+  [string, string, BigNumber] & {
+    owner: string;
+    spender: string;
+    value: BigNumber;
+  }
+>;
+
+export type FeeCollectionEvent = TypedEvent<
+  [BigNumber, BigNumber, BigNumber, BigNumber] & {
+    collectedBase: BigNumber;
+    collectedBond: BigNumber;
+    remainingBase: BigNumber;
+    remainingBond: BigNumber;
+  }
+>;
+
+export type TransferEvent = TypedEvent<
+  [string, string, BigNumber] & { from: string; to: string; value: BigNumber }
+>;
 
 export class ConvergentCurvePool extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -738,6 +759,15 @@ export class ConvergentCurvePool extends BaseContract {
   };
 
   filters: {
+    "Approval(address,address,uint256)"(
+      owner?: string | null,
+      spender?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { owner: string; spender: string; value: BigNumber }
+    >;
+
     Approval(
       owner?: string | null,
       spender?: string | null,
@@ -745,6 +775,21 @@ export class ConvergentCurvePool extends BaseContract {
     ): TypedEventFilter<
       [string, string, BigNumber],
       { owner: string; spender: string; value: BigNumber }
+    >;
+
+    "FeeCollection(uint256,uint256,uint256,uint256)"(
+      collectedBase?: null,
+      collectedBond?: null,
+      remainingBase?: null,
+      remainingBond?: null
+    ): TypedEventFilter<
+      [BigNumber, BigNumber, BigNumber, BigNumber],
+      {
+        collectedBase: BigNumber;
+        collectedBond: BigNumber;
+        remainingBase: BigNumber;
+        remainingBond: BigNumber;
+      }
     >;
 
     FeeCollection(
@@ -760,6 +805,15 @@ export class ConvergentCurvePool extends BaseContract {
         remainingBase: BigNumber;
         remainingBond: BigNumber;
       }
+    >;
+
+    "Transfer(address,address,uint256)"(
+      from?: string | null,
+      to?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
     >;
 
     Transfer(

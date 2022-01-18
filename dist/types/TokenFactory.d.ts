@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface TokenFactoryInterface extends ethers.utils.Interface {
   functions: {
@@ -52,6 +52,8 @@ interface TokenFactoryInterface extends ethers.utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: "TokenCreated"): EventFragment;
 }
+
+export type TokenCreatedEvent = TypedEvent<[string] & { token: string }>;
 
 export class TokenFactory extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -149,6 +151,10 @@ export class TokenFactory extends BaseContract {
   };
 
   filters: {
+    "TokenCreated(address)"(
+      token?: string | null
+    ): TypedEventFilter<[string], { token: string }>;
+
     TokenCreated(
       token?: string | null
     ): TypedEventFilter<[string], { token: string }>;

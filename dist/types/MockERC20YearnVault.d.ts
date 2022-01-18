@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface MockERC20YearnVaultInterface extends ethers.utils.Interface {
   functions: {
@@ -25,6 +25,7 @@ interface MockERC20YearnVaultInterface extends ethers.utils.Interface {
     "DOMAIN_SEPARATOR()": FunctionFragment;
     "PERMIT_TYPEHASH()": FunctionFragment;
     "allowance(address,address)": FunctionFragment;
+    "apiVersion()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "authorize(address)": FunctionFragment;
     "authorized(address)": FunctionFragment;
@@ -71,6 +72,10 @@ interface MockERC20YearnVaultInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "allowance",
     values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "apiVersion",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -177,6 +182,7 @@ interface MockERC20YearnVaultInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "apiVersion", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "authorize", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "authorized", data: BytesLike): Result;
@@ -249,6 +255,18 @@ interface MockERC20YearnVaultInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
+export type ApprovalEvent = TypedEvent<
+  [string, string, BigNumber] & {
+    owner: string;
+    spender: string;
+    value: BigNumber;
+  }
+>;
+
+export type TransferEvent = TypedEvent<
+  [string, string, BigNumber] & { from: string; to: string; value: BigNumber }
+>;
+
 export class MockERC20YearnVault extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
@@ -304,6 +322,8 @@ export class MockERC20YearnVault extends BaseContract {
       arg1: string,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    apiVersion(overrides?: CallOverrides): Promise<[string]>;
 
     approve(
       account: string,
@@ -422,6 +442,8 @@ export class MockERC20YearnVault extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  apiVersion(overrides?: CallOverrides): Promise<string>;
+
   approve(
     account: string,
     amount: BigNumberish,
@@ -539,6 +561,8 @@ export class MockERC20YearnVault extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    apiVersion(overrides?: CallOverrides): Promise<string>;
+
     approve(
       account: string,
       amount: BigNumberish,
@@ -633,6 +657,15 @@ export class MockERC20YearnVault extends BaseContract {
   };
 
   filters: {
+    "Approval(address,address,uint256)"(
+      owner?: string | null,
+      spender?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { owner: string; spender: string; value: BigNumber }
+    >;
+
     Approval(
       owner?: string | null,
       spender?: string | null,
@@ -640,6 +673,15 @@ export class MockERC20YearnVault extends BaseContract {
     ): TypedEventFilter<
       [string, string, BigNumber],
       { owner: string; spender: string; value: BigNumber }
+    >;
+
+    "Transfer(address,address,uint256)"(
+      from?: string | null,
+      to?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
     >;
 
     Transfer(
@@ -664,6 +706,8 @@ export class MockERC20YearnVault extends BaseContract {
       arg1: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    apiVersion(overrides?: CallOverrides): Promise<BigNumber>;
 
     approve(
       account: string,
@@ -784,6 +828,8 @@ export class MockERC20YearnVault extends BaseContract {
       arg1: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    apiVersion(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     approve(
       account: string,

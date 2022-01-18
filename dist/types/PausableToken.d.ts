@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface PausableTokenInterface extends ethers.utils.Interface {
   functions: {
@@ -128,6 +128,30 @@ interface PausableTokenInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
+
+export type PauseEvent = TypedEvent<[] & {}>;
+
+export type UnpauseEvent = TypedEvent<[] & {}>;
+
+export type OwnershipRenouncedEvent = TypedEvent<
+  [string] & { previousOwner: string }
+>;
+
+export type OwnershipTransferredEvent = TypedEvent<
+  [string, string] & { previousOwner: string; newOwner: string }
+>;
+
+export type ApprovalEvent = TypedEvent<
+  [string, string, BigNumber] & {
+    owner: string;
+    spender: string;
+    value: BigNumber;
+  }
+>;
+
+export type TransferEvent = TypedEvent<
+  [string, string, BigNumber] & { from: string; to: string; value: BigNumber }
+>;
 
 export class PausableToken extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -357,13 +381,29 @@ export class PausableToken extends BaseContract {
   };
 
   filters: {
+    "Pause()"(): TypedEventFilter<[], {}>;
+
     Pause(): TypedEventFilter<[], {}>;
 
+    "Unpause()"(): TypedEventFilter<[], {}>;
+
     Unpause(): TypedEventFilter<[], {}>;
+
+    "OwnershipRenounced(address)"(
+      previousOwner?: string | null
+    ): TypedEventFilter<[string], { previousOwner: string }>;
 
     OwnershipRenounced(
       previousOwner?: string | null
     ): TypedEventFilter<[string], { previousOwner: string }>;
+
+    "OwnershipTransferred(address,address)"(
+      previousOwner?: string | null,
+      newOwner?: string | null
+    ): TypedEventFilter<
+      [string, string],
+      { previousOwner: string; newOwner: string }
+    >;
 
     OwnershipTransferred(
       previousOwner?: string | null,
@@ -373,6 +413,15 @@ export class PausableToken extends BaseContract {
       { previousOwner: string; newOwner: string }
     >;
 
+    "Approval(address,address,uint256)"(
+      owner?: string | null,
+      spender?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { owner: string; spender: string; value: BigNumber }
+    >;
+
     Approval(
       owner?: string | null,
       spender?: string | null,
@@ -380,6 +429,15 @@ export class PausableToken extends BaseContract {
     ): TypedEventFilter<
       [string, string, BigNumber],
       { owner: string; spender: string; value: BigNumber }
+    >;
+
+    "Transfer(address,address,uint256)"(
+      from?: string | null,
+      to?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
     >;
 
     Transfer(

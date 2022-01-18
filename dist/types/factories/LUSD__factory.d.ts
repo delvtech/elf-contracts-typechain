@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { LUSD, LUSDInterface } from "../LUSD";
 export declare class LUSD__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(sender: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<LUSD>;

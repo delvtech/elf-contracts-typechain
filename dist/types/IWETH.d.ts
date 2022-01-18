@@ -18,7 +18,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface IWETHInterface extends ethers.utils.Interface {
   functions: {
@@ -83,6 +83,26 @@ interface IWETHInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Withdrawal"): EventFragment;
 }
+
+export type ApprovalEvent = TypedEvent<
+  [string, string, BigNumber] & {
+    owner: string;
+    spender: string;
+    value: BigNumber;
+  }
+>;
+
+export type DepositEvent = TypedEvent<
+  [string, BigNumber] & { dst: string; wad: BigNumber }
+>;
+
+export type TransferEvent = TypedEvent<
+  [string, string, BigNumber] & { from: string; to: string; value: BigNumber }
+>;
+
+export type WithdrawalEvent = TypedEvent<
+  [string, BigNumber] & { src: string; wad: BigNumber }
+>;
 
 export class IWETH extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -247,6 +267,15 @@ export class IWETH extends BaseContract {
   };
 
   filters: {
+    "Approval(address,address,uint256)"(
+      owner?: string | null,
+      spender?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { owner: string; spender: string; value: BigNumber }
+    >;
+
     Approval(
       owner?: string | null,
       spender?: string | null,
@@ -256,10 +285,24 @@ export class IWETH extends BaseContract {
       { owner: string; spender: string; value: BigNumber }
     >;
 
+    "Deposit(address,uint256)"(
+      dst?: string | null,
+      wad?: null
+    ): TypedEventFilter<[string, BigNumber], { dst: string; wad: BigNumber }>;
+
     Deposit(
       dst?: string | null,
       wad?: null
     ): TypedEventFilter<[string, BigNumber], { dst: string; wad: BigNumber }>;
+
+    "Transfer(address,address,uint256)"(
+      from?: string | null,
+      to?: string | null,
+      value?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { from: string; to: string; value: BigNumber }
+    >;
 
     Transfer(
       from?: string | null,
@@ -269,6 +312,11 @@ export class IWETH extends BaseContract {
       [string, string, BigNumber],
       { from: string; to: string; value: BigNumber }
     >;
+
+    "Withdrawal(address,uint256)"(
+      src?: string | null,
+      wad?: null
+    ): TypedEventFilter<[string, BigNumber], { src: string; wad: BigNumber }>;
 
     Withdrawal(
       src?: string | null,

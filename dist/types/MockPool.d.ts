@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface MockPoolInterface extends ethers.utils.Interface {
   functions: {
@@ -26,7 +26,7 @@ interface MockPoolInterface extends ethers.utils.Interface {
     "getVault()": FunctionFragment;
     "onExitPool(bytes32,address,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
     "onJoinPool(bytes32,address,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
-    "onSwap(tuple,uint256[],uint256,uint256)": FunctionFragment;
+    "onSwap((uint8,address,address,uint256,bytes32,uint256,address,address,bytes),uint256[],uint256,uint256)": FunctionFragment;
     "registerTokens(address[],address[])": FunctionFragment;
     "setMultiplier(uint256)": FunctionFragment;
   };
@@ -115,6 +115,30 @@ interface MockPoolInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "OnExitPoolCalled"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OnJoinPoolCalled"): EventFragment;
 }
+
+export type OnExitPoolCalledEvent = TypedEvent<
+  [string, string, string, BigNumber[], BigNumber, BigNumber, string] & {
+    poolId: string;
+    sender: string;
+    recipient: string;
+    currentBalances: BigNumber[];
+    lastChangeBlock: BigNumber;
+    protocolSwapFeePercentage: BigNumber;
+    userData: string;
+  }
+>;
+
+export type OnJoinPoolCalledEvent = TypedEvent<
+  [string, string, string, BigNumber[], BigNumber, BigNumber, string] & {
+    poolId: string;
+    sender: string;
+    recipient: string;
+    currentBalances: BigNumber[];
+    lastChangeBlock: BigNumber;
+    protocolSwapFeePercentage: BigNumber;
+    userData: string;
+  }
+>;
 
 export class MockPool extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -405,7 +429,49 @@ export class MockPool extends BaseContract {
   };
 
   filters: {
+    "OnExitPoolCalled(bytes32,address,address,uint256[],uint256,uint256,bytes)"(
+      poolId?: null,
+      sender?: null,
+      recipient?: null,
+      currentBalances?: null,
+      lastChangeBlock?: null,
+      protocolSwapFeePercentage?: null,
+      userData?: null
+    ): TypedEventFilter<
+      [string, string, string, BigNumber[], BigNumber, BigNumber, string],
+      {
+        poolId: string;
+        sender: string;
+        recipient: string;
+        currentBalances: BigNumber[];
+        lastChangeBlock: BigNumber;
+        protocolSwapFeePercentage: BigNumber;
+        userData: string;
+      }
+    >;
+
     OnExitPoolCalled(
+      poolId?: null,
+      sender?: null,
+      recipient?: null,
+      currentBalances?: null,
+      lastChangeBlock?: null,
+      protocolSwapFeePercentage?: null,
+      userData?: null
+    ): TypedEventFilter<
+      [string, string, string, BigNumber[], BigNumber, BigNumber, string],
+      {
+        poolId: string;
+        sender: string;
+        recipient: string;
+        currentBalances: BigNumber[];
+        lastChangeBlock: BigNumber;
+        protocolSwapFeePercentage: BigNumber;
+        userData: string;
+      }
+    >;
+
+    "OnJoinPoolCalled(bytes32,address,address,uint256[],uint256,uint256,bytes)"(
       poolId?: null,
       sender?: null,
       recipient?: null,

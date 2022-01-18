@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface SignaturesValidatorMockInterface extends ethers.utils.Interface {
   functions: {
@@ -87,6 +87,20 @@ interface SignaturesValidatorMockInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Authenticated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "CalldataDecoded"): EventFragment;
 }
+
+export type AuthenticatedEvent = TypedEvent<
+  [string, string] & { user: string; sender: string }
+>;
+
+export type CalldataDecodedEvent = TypedEvent<
+  [string, BigNumber, number, string, string] & {
+    data: string;
+    deadline: BigNumber;
+    v: number;
+    r: string;
+    s: string;
+  }
+>;
 
 export class SignaturesValidatorMock extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -194,10 +208,26 @@ export class SignaturesValidatorMock extends BaseContract {
   };
 
   filters: {
+    "Authenticated(address,address)"(
+      user?: null,
+      sender?: null
+    ): TypedEventFilter<[string, string], { user: string; sender: string }>;
+
     Authenticated(
       user?: null,
       sender?: null
     ): TypedEventFilter<[string, string], { user: string; sender: string }>;
+
+    "CalldataDecoded(bytes,uint256,uint8,bytes32,bytes32)"(
+      data?: null,
+      deadline?: null,
+      v?: null,
+      r?: null,
+      s?: null
+    ): TypedEventFilter<
+      [string, BigNumber, number, string, string],
+      { data: string; deadline: BigNumber; v: number; r: string; s: string }
+    >;
 
     CalldataDecoded(
       data?: null,

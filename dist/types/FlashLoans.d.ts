@@ -18,14 +18,14 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface FlashLoansInterface extends ethers.utils.Interface {
   functions: {
     "WETH()": FunctionFragment;
-    "batchSwap(uint8,tuple[],address[],tuple,int256[],uint256)": FunctionFragment;
+    "batchSwap(uint8,tuple[],address[],(address,bool,address,bool),int256[],uint256)": FunctionFragment;
     "deregisterTokens(bytes32,address[])": FunctionFragment;
-    "exitPool(bytes32,address,address,tuple)": FunctionFragment;
+    "exitPool(bytes32,address,address,(address[],uint256[],bytes,bool))": FunctionFragment;
     "flashLoan(address,address[],uint256[],bytes)": FunctionFragment;
     "getAuthorizer()": FunctionFragment;
     "getDomainSeparator()": FunctionFragment;
@@ -37,16 +37,16 @@ interface FlashLoansInterface extends ethers.utils.Interface {
     "getPoolTokens(bytes32)": FunctionFragment;
     "getProtocolFeesCollector()": FunctionFragment;
     "hasApprovedRelayer(address,address)": FunctionFragment;
-    "joinPool(bytes32,address,address,tuple)": FunctionFragment;
+    "joinPool(bytes32,address,address,(address[],uint256[],bytes,bool))": FunctionFragment;
     "managePoolBalance(tuple[])": FunctionFragment;
     "manageUserBalance(tuple[])": FunctionFragment;
-    "queryBatchSwap(uint8,tuple[],address[],tuple)": FunctionFragment;
+    "queryBatchSwap(uint8,tuple[],address[],(address,bool,address,bool))": FunctionFragment;
     "registerPool(uint8)": FunctionFragment;
     "registerTokens(bytes32,address[],address[])": FunctionFragment;
     "setAuthorizer(address)": FunctionFragment;
     "setPaused(bool)": FunctionFragment;
     "setRelayerApproval(address,address,bool)": FunctionFragment;
-    "swap(tuple,tuple,uint256,uint256)": FunctionFragment;
+    "swap((bytes32,uint8,address,address,uint256,bytes),(address,bool,address,bool),uint256,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "WETH", values?: undefined): string;
@@ -332,6 +332,98 @@ interface FlashLoansInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "TokensDeregistered"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "TokensRegistered"): EventFragment;
 }
+
+export type AuthorizerChangedEvent = TypedEvent<
+  [string] & { newAuthorizer: string }
+>;
+
+export type ExternalBalanceTransferEvent = TypedEvent<
+  [string, string, string, BigNumber] & {
+    token: string;
+    sender: string;
+    recipient: string;
+    amount: BigNumber;
+  }
+>;
+
+export type FlashLoanEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber] & {
+    recipient: string;
+    token: string;
+    amount: BigNumber;
+    feeAmount: BigNumber;
+  }
+>;
+
+export type InternalBalanceChangedEvent = TypedEvent<
+  [string, string, BigNumber] & {
+    user: string;
+    token: string;
+    delta: BigNumber;
+  }
+>;
+
+export type PausedStateChangedEvent = TypedEvent<
+  [boolean] & { paused: boolean }
+>;
+
+export type PoolBalanceChangedEvent = TypedEvent<
+  [string, string, string[], BigNumber[], BigNumber[]] & {
+    poolId: string;
+    liquidityProvider: string;
+    tokens: string[];
+    deltas: BigNumber[];
+    protocolFeeAmounts: BigNumber[];
+  }
+>;
+
+export type PoolBalanceManagedEvent = TypedEvent<
+  [string, string, string, BigNumber, BigNumber] & {
+    poolId: string;
+    assetManager: string;
+    token: string;
+    cashDelta: BigNumber;
+    managedDelta: BigNumber;
+  }
+>;
+
+export type PoolRegisteredEvent = TypedEvent<
+  [string, string, number] & {
+    poolId: string;
+    poolAddress: string;
+    specialization: number;
+  }
+>;
+
+export type RelayerApprovalChangedEvent = TypedEvent<
+  [string, string, boolean] & {
+    relayer: string;
+    sender: string;
+    approved: boolean;
+  }
+>;
+
+export type SwapEvent = TypedEvent<
+  [string, string, string, BigNumber, BigNumber] & {
+    poolId: string;
+    tokenIn: string;
+    tokenOut: string;
+    amountIn: BigNumber;
+    amountOut: BigNumber;
+  }
+>;
+
+export type TokensDeregisteredEvent = TypedEvent<
+  [string, string[]] & { poolId: string; tokens: string[] }
+>;
+
+export type TokensRegisteredEvent = TypedEvent<
+  [string, string[], string[]] & {
+    poolId: string;
+    tokens: string[];
+    assetManagers: string[];
+  }
+>;
 
 export class FlashLoans extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -1011,9 +1103,23 @@ export class FlashLoans extends BaseContract {
   };
 
   filters: {
+    "AuthorizerChanged(address)"(
+      newAuthorizer?: string | null
+    ): TypedEventFilter<[string], { newAuthorizer: string }>;
+
     AuthorizerChanged(
       newAuthorizer?: string | null
     ): TypedEventFilter<[string], { newAuthorizer: string }>;
+
+    "ExternalBalanceTransfer(address,address,address,uint256)"(
+      token?: string | null,
+      sender?: string | null,
+      recipient?: null,
+      amount?: null
+    ): TypedEventFilter<
+      [string, string, string, BigNumber],
+      { token: string; sender: string; recipient: string; amount: BigNumber }
+    >;
 
     ExternalBalanceTransfer(
       token?: string | null,
@@ -1023,6 +1129,21 @@ export class FlashLoans extends BaseContract {
     ): TypedEventFilter<
       [string, string, string, BigNumber],
       { token: string; sender: string; recipient: string; amount: BigNumber }
+    >;
+
+    "FlashLoan(address,address,uint256,uint256)"(
+      recipient?: string | null,
+      token?: string | null,
+      amount?: null,
+      feeAmount?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber, BigNumber],
+      {
+        recipient: string;
+        token: string;
+        amount: BigNumber;
+        feeAmount: BigNumber;
+      }
     >;
 
     FlashLoan(
@@ -1040,6 +1161,15 @@ export class FlashLoans extends BaseContract {
       }
     >;
 
+    "InternalBalanceChanged(address,address,int256)"(
+      user?: string | null,
+      token?: string | null,
+      delta?: null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { user: string; token: string; delta: BigNumber }
+    >;
+
     InternalBalanceChanged(
       user?: string | null,
       token?: string | null,
@@ -1049,9 +1179,30 @@ export class FlashLoans extends BaseContract {
       { user: string; token: string; delta: BigNumber }
     >;
 
+    "PausedStateChanged(bool)"(
+      paused?: null
+    ): TypedEventFilter<[boolean], { paused: boolean }>;
+
     PausedStateChanged(
       paused?: null
     ): TypedEventFilter<[boolean], { paused: boolean }>;
+
+    "PoolBalanceChanged(bytes32,address,address[],int256[],uint256[])"(
+      poolId?: BytesLike | null,
+      liquidityProvider?: string | null,
+      tokens?: null,
+      deltas?: null,
+      protocolFeeAmounts?: null
+    ): TypedEventFilter<
+      [string, string, string[], BigNumber[], BigNumber[]],
+      {
+        poolId: string;
+        liquidityProvider: string;
+        tokens: string[];
+        deltas: BigNumber[];
+        protocolFeeAmounts: BigNumber[];
+      }
+    >;
 
     PoolBalanceChanged(
       poolId?: BytesLike | null,
@@ -1067,6 +1218,23 @@ export class FlashLoans extends BaseContract {
         tokens: string[];
         deltas: BigNumber[];
         protocolFeeAmounts: BigNumber[];
+      }
+    >;
+
+    "PoolBalanceManaged(bytes32,address,address,int256,int256)"(
+      poolId?: BytesLike | null,
+      assetManager?: string | null,
+      token?: string | null,
+      cashDelta?: null,
+      managedDelta?: null
+    ): TypedEventFilter<
+      [string, string, string, BigNumber, BigNumber],
+      {
+        poolId: string;
+        assetManager: string;
+        token: string;
+        cashDelta: BigNumber;
+        managedDelta: BigNumber;
       }
     >;
 
@@ -1087,6 +1255,15 @@ export class FlashLoans extends BaseContract {
       }
     >;
 
+    "PoolRegistered(bytes32,address,uint8)"(
+      poolId?: BytesLike | null,
+      poolAddress?: string | null,
+      specialization?: null
+    ): TypedEventFilter<
+      [string, string, number],
+      { poolId: string; poolAddress: string; specialization: number }
+    >;
+
     PoolRegistered(
       poolId?: BytesLike | null,
       poolAddress?: string | null,
@@ -1096,6 +1273,15 @@ export class FlashLoans extends BaseContract {
       { poolId: string; poolAddress: string; specialization: number }
     >;
 
+    "RelayerApprovalChanged(address,address,bool)"(
+      relayer?: string | null,
+      sender?: string | null,
+      approved?: null
+    ): TypedEventFilter<
+      [string, string, boolean],
+      { relayer: string; sender: string; approved: boolean }
+    >;
+
     RelayerApprovalChanged(
       relayer?: string | null,
       sender?: string | null,
@@ -1103,6 +1289,23 @@ export class FlashLoans extends BaseContract {
     ): TypedEventFilter<
       [string, string, boolean],
       { relayer: string; sender: string; approved: boolean }
+    >;
+
+    "Swap(bytes32,address,address,uint256,uint256)"(
+      poolId?: BytesLike | null,
+      tokenIn?: string | null,
+      tokenOut?: string | null,
+      amountIn?: null,
+      amountOut?: null
+    ): TypedEventFilter<
+      [string, string, string, BigNumber, BigNumber],
+      {
+        poolId: string;
+        tokenIn: string;
+        tokenOut: string;
+        amountIn: BigNumber;
+        amountOut: BigNumber;
+      }
     >;
 
     Swap(
@@ -1122,12 +1325,29 @@ export class FlashLoans extends BaseContract {
       }
     >;
 
+    "TokensDeregistered(bytes32,address[])"(
+      poolId?: BytesLike | null,
+      tokens?: null
+    ): TypedEventFilter<
+      [string, string[]],
+      { poolId: string; tokens: string[] }
+    >;
+
     TokensDeregistered(
       poolId?: BytesLike | null,
       tokens?: null
     ): TypedEventFilter<
       [string, string[]],
       { poolId: string; tokens: string[] }
+    >;
+
+    "TokensRegistered(bytes32,address[],address[])"(
+      poolId?: BytesLike | null,
+      tokens?: null,
+      assetManagers?: null
+    ): TypedEventFilter<
+      [string, string[], string[]],
+      { poolId: string; tokens: string[]; assetManagers: string[] }
     >;
 
     TokensRegistered(

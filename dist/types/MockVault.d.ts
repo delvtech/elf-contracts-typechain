@@ -17,13 +17,13 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface MockVaultInterface extends ethers.utils.Interface {
   functions: {
     "callExitPool(address,bytes32,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
     "callJoinPool(address,bytes32,address,uint256[],uint256,uint256,bytes)": FunctionFragment;
-    "callMinimalPoolSwap(address,tuple,uint256,uint256)": FunctionFragment;
+    "callMinimalPoolSwap(address,(uint8,address,address,uint256,bytes32,uint256,address,address,bytes),uint256,uint256)": FunctionFragment;
     "getAuthorizer()": FunctionFragment;
     "getPoolTokens(bytes32)": FunctionFragment;
     "registerPool(uint8)": FunctionFragment;
@@ -127,6 +127,25 @@ interface MockVaultInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "PoolBalanceChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Swap"): EventFragment;
 }
+
+export type PoolBalanceChangedEvent = TypedEvent<
+  [string, string, string[], BigNumber[], BigNumber[]] & {
+    poolId: string;
+    liquidityProvider: string;
+    tokens: string[];
+    deltas: BigNumber[];
+    protocolFees: BigNumber[];
+  }
+>;
+
+export type SwapEvent = TypedEvent<
+  [string, string, string, BigNumber] & {
+    poolId: string;
+    tokenIn: string;
+    tokenOut: string;
+    amount: BigNumber;
+  }
+>;
 
 export class MockVault extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -356,6 +375,23 @@ export class MockVault extends BaseContract {
   };
 
   filters: {
+    "PoolBalanceChanged(bytes32,address,address[],int256[],uint256[])"(
+      poolId?: BytesLike | null,
+      liquidityProvider?: string | null,
+      tokens?: null,
+      deltas?: null,
+      protocolFees?: null
+    ): TypedEventFilter<
+      [string, string, string[], BigNumber[], BigNumber[]],
+      {
+        poolId: string;
+        liquidityProvider: string;
+        tokens: string[];
+        deltas: BigNumber[];
+        protocolFees: BigNumber[];
+      }
+    >;
+
     PoolBalanceChanged(
       poolId?: BytesLike | null,
       liquidityProvider?: string | null,
@@ -371,6 +407,16 @@ export class MockVault extends BaseContract {
         deltas: BigNumber[];
         protocolFees: BigNumber[];
       }
+    >;
+
+    "Swap(bytes32,address,address,uint256)"(
+      poolId?: BytesLike | null,
+      tokenIn?: string | null,
+      tokenOut?: string | null,
+      amount?: null
+    ): TypedEventFilter<
+      [string, string, string, BigNumber],
+      { poolId: string; tokenIn: string; tokenOut: string; amount: BigNumber }
     >;
 
     Swap(

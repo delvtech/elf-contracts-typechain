@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ERC20Basic__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         constant: true,
         inputs: [],
@@ -85,16 +85,13 @@ var _abi = [
         type: "event",
     },
 ];
-var ERC20Basic__factory = /** @class */ (function () {
-    function ERC20Basic__factory() {
-    }
-    ERC20Basic__factory.createInterface = function () {
+class ERC20Basic__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ERC20Basic__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ERC20Basic__factory.abi = _abi;
-    return ERC20Basic__factory;
-}());
+    }
+}
 exports.ERC20Basic__factory = ERC20Basic__factory;
+ERC20Basic__factory.abi = _abi;

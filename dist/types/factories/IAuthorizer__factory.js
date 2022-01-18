@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IAuthorizer__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         inputs: [
             {
@@ -36,16 +36,13 @@ var _abi = [
         type: "function",
     },
 ];
-var IAuthorizer__factory = /** @class */ (function () {
-    function IAuthorizer__factory() {
-    }
-    IAuthorizer__factory.createInterface = function () {
+class IAuthorizer__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IAuthorizer__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IAuthorizer__factory.abi = _abi;
-    return IAuthorizer__factory;
-}());
+    }
+}
 exports.IAuthorizer__factory = IAuthorizer__factory;
+IAuthorizer__factory.abi = _abi;

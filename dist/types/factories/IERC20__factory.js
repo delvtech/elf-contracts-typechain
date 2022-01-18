@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IERC20__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         anonymous: false,
         inputs: [
@@ -125,25 +125,12 @@ var _abi = [
     },
     {
         inputs: [],
-        name: "decimals",
+        name: "totalSupply",
         outputs: [
             {
-                internalType: "uint8",
+                internalType: "uint256",
                 name: "",
-                type: "uint8",
-            },
-        ],
-        stateMutability: "view",
-        type: "function",
-    },
-    {
-        inputs: [],
-        name: "symbol",
-        outputs: [
-            {
-                internalType: "string",
-                name: "",
-                type: "string",
+                type: "uint256",
             },
         ],
         stateMutability: "view",
@@ -203,16 +190,13 @@ var _abi = [
         type: "function",
     },
 ];
-var IERC20__factory = /** @class */ (function () {
-    function IERC20__factory() {
-    }
-    IERC20__factory.createInterface = function () {
+class IERC20__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IERC20__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IERC20__factory.abi = _abi;
-    return IERC20__factory;
-}());
+    }
+}
 exports.IERC20__factory = IERC20__factory;
+IERC20__factory.abi = _abi;

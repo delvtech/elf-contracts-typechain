@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ISignaturesValidator__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         inputs: [],
         name: "getDomainSeparator",
@@ -39,16 +39,13 @@ var _abi = [
         type: "function",
     },
 ];
-var ISignaturesValidator__factory = /** @class */ (function () {
-    function ISignaturesValidator__factory() {
-    }
-    ISignaturesValidator__factory.createInterface = function () {
+class ISignaturesValidator__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    ISignaturesValidator__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    ISignaturesValidator__factory.abi = _abi;
-    return ISignaturesValidator__factory;
-}());
+    }
+}
 exports.ISignaturesValidator__factory = ISignaturesValidator__factory;
+ISignaturesValidator__factory.abi = _abi;

@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface TrancheFactoryInterface extends ethers.utils.Interface {
   functions: {
@@ -52,6 +52,14 @@ interface TrancheFactoryInterface extends ethers.utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: "TrancheCreated"): EventFragment;
 }
+
+export type TrancheCreatedEvent = TypedEvent<
+  [string, string, BigNumber] & {
+    trancheAddress: string;
+    wpAddress: string;
+    expiration: BigNumber;
+  }
+>;
 
 export class TrancheFactory extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -137,6 +145,15 @@ export class TrancheFactory extends BaseContract {
   };
 
   filters: {
+    "TrancheCreated(address,address,uint256)"(
+      trancheAddress?: string | null,
+      wpAddress?: string | null,
+      expiration?: BigNumberish | null
+    ): TypedEventFilter<
+      [string, string, BigNumber],
+      { trancheAddress: string; wpAddress: string; expiration: BigNumber }
+    >;
+
     TrancheCreated(
       trancheAddress?: string | null,
       wpAddress?: string | null,

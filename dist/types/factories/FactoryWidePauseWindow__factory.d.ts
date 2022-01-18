@@ -2,7 +2,7 @@ import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { FactoryWidePauseWindow, FactoryWidePauseWindowInterface } from "../FactoryWidePauseWindow";
 export declare class FactoryWidePauseWindow__factory extends ContractFactory {
-    constructor(signer?: Signer);
+    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<FactoryWidePauseWindow>;

@@ -126,25 +126,12 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "decimals",
+    name: "totalSupply",
     outputs: [
       {
-        internalType: "uint8",
+        internalType: "uint256",
         name: "",
-        type: "uint8",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "symbol",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string",
+        type: "uint256",
       },
     ],
     stateMutability: "view",

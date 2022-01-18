@@ -17,7 +17,7 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface EnumerableIERC20ToBytes32MapMockInterface
   extends ethers.utils.Interface {
@@ -92,6 +92,8 @@ interface EnumerableIERC20ToBytes32MapMockInterface
 
   getEvent(nameOrSignatureOrTopic: "OperationResult"): EventFragment;
 }
+
+export type OperationResultEvent = TypedEvent<[boolean] & { result: boolean }>;
 
 export class EnumerableIERC20ToBytes32MapMock extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -276,6 +278,10 @@ export class EnumerableIERC20ToBytes32MapMock extends BaseContract {
   };
 
   filters: {
+    "OperationResult(bool)"(
+      result?: null
+    ): TypedEventFilter<[boolean], { result: boolean }>;
+
     OperationResult(
       result?: null
     ): TypedEventFilter<[boolean], { result: boolean }>;

@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CurveContract__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         inputs: [
             {
@@ -31,16 +31,13 @@ var _abi = [
         type: "function",
     },
 ];
-var CurveContract__factory = /** @class */ (function () {
-    function CurveContract__factory() {
-    }
-    CurveContract__factory.createInterface = function () {
+class CurveContract__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    CurveContract__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    CurveContract__factory.abi = _abi;
-    return CurveContract__factory;
-}());
+    }
+}
 exports.CurveContract__factory = CurveContract__factory;
+CurveContract__factory.abi = _abi;

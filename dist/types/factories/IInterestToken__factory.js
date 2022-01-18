@@ -4,8 +4,8 @@
 /* eslint-disable */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IInterestToken__factory = void 0;
-var ethers_1 = require("ethers");
-var _abi = [
+const ethers_1 = require("ethers");
+const _abi = [
     {
         anonymous: false,
         inputs: [
@@ -314,16 +314,13 @@ var _abi = [
         type: "function",
     },
 ];
-var IInterestToken__factory = /** @class */ (function () {
-    function IInterestToken__factory() {
-    }
-    IInterestToken__factory.createInterface = function () {
+class IInterestToken__factory {
+    static createInterface() {
         return new ethers_1.utils.Interface(_abi);
-    };
-    IInterestToken__factory.connect = function (address, signerOrProvider) {
+    }
+    static connect(address, signerOrProvider) {
         return new ethers_1.Contract(address, _abi, signerOrProvider);
-    };
-    IInterestToken__factory.abi = _abi;
-    return IInterestToken__factory;
-}());
+    }
+}
 exports.IInterestToken__factory = IInterestToken__factory;
+IInterestToken__factory.abi = _abi;

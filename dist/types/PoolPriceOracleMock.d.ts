@@ -17,17 +17,17 @@ import {
 import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
+import type { TypedEventFilter, TypedEvent, TypedListener } from "./common";
 
 interface PoolPriceOracleMockInterface extends ethers.utils.Interface {
   functions: {
     "decode(bytes32)": FunctionFragment;
-    "encode(tuple)": FunctionFragment;
+    "encode((int256,int256,int256,int256,int256,int256,uint256))": FunctionFragment;
     "findNearestSamplesTimestamp(uint256[],uint256)": FunctionFragment;
     "getPastAccumulator(uint8,uint256,uint256)": FunctionFragment;
     "getSample(uint256)": FunctionFragment;
     "getTotalSamples()": FunctionFragment;
-    "mockSample(uint256,tuple)": FunctionFragment;
+    "mockSample(uint256,(int256,int256,int256,int256,int256,int256,uint256))": FunctionFragment;
     "mockSamples(uint256[],tuple[])": FunctionFragment;
     "processPriceData(uint256,uint256,int256,int256,int256)": FunctionFragment;
     "update(bytes32,int256,int256,int256,uint256)": FunctionFragment;
@@ -141,6 +141,10 @@ interface PoolPriceOracleMockInterface extends ethers.utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: "PriceDataProcessed"): EventFragment;
 }
+
+export type PriceDataProcessedEvent = TypedEvent<
+  [boolean, BigNumber] & { newSample: boolean; sampleIndex: BigNumber }
+>;
 
 export class PoolPriceOracleMock extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -617,6 +621,14 @@ export class PoolPriceOracleMock extends BaseContract {
   };
 
   filters: {
+    "PriceDataProcessed(bool,uint256)"(
+      newSample?: null,
+      sampleIndex?: null
+    ): TypedEventFilter<
+      [boolean, BigNumber],
+      { newSample: boolean; sampleIndex: BigNumber }
+    >;
+
     PriceDataProcessed(
       newSample?: null,
       sampleIndex?: null
