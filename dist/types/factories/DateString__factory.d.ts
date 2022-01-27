@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { DateString, DateStringInterface } from "../DateString";
+declare type DateStringConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class DateString__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: DateStringConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<DateString>;
@@ -26,3 +27,4 @@ export declare class DateString__factory extends ContractFactory {
     static createInterface(): DateStringInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): DateString;
 }
+export {};

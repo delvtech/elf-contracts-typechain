@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PausableToken, PausableTokenInterface } from "../PausableToken";
+declare type PausableTokenConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class PausableToken__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: PausableTokenConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<PausableToken>;
@@ -44,3 +45,4 @@ export declare class PausableToken__factory extends ContractFactory {
     static createInterface(): PausableTokenInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): PausableToken;
 }
+export {};

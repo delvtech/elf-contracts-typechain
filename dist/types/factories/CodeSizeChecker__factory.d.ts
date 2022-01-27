@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { CodeSizeChecker, CodeSizeCheckerInterface } from "../CodeSizeChecker";
+declare type CodeSizeCheckerConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class CodeSizeChecker__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: CodeSizeCheckerConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<CodeSizeChecker>;
@@ -30,3 +31,4 @@ export declare class CodeSizeChecker__factory extends ContractFactory {
     static createInterface(): CodeSizeCheckerInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): CodeSizeChecker;
 }
+export {};

@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { BalancerHelpers, BalancerHelpersInterface } from "../BalancerHelpers";
+declare type BalancerHelpersConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class BalancerHelpers__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: BalancerHelpersConstructorParams);
     deploy(_vault: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<BalancerHelpers>;
@@ -50,3 +51,4 @@ export declare class BalancerHelpers__factory extends ContractFactory {
     static createInterface(): BalancerHelpersInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): BalancerHelpers;
 }
+export {};

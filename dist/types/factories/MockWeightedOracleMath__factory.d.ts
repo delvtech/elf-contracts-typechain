@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MockWeightedOracleMath, MockWeightedOracleMathInterface } from "../MockWeightedOracleMath";
+declare type MockWeightedOracleMathConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class MockWeightedOracleMath__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: MockWeightedOracleMathConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MockWeightedOracleMath>;
@@ -30,3 +31,4 @@ export declare class MockWeightedOracleMath__factory extends ContractFactory {
     static createInterface(): MockWeightedOracleMathInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): MockWeightedOracleMath;
 }
+export {};

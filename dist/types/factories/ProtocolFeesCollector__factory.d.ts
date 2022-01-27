@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { ProtocolFeesCollector, ProtocolFeesCollectorInterface } from "../ProtocolFeesCollector";
+declare type ProtocolFeesCollectorConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ProtocolFeesCollector__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: ProtocolFeesCollectorConstructorParams);
     deploy(_vault: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ProtocolFeesCollector>;
@@ -54,3 +55,4 @@ export declare class ProtocolFeesCollector__factory extends ContractFactory {
     static createInterface(): ProtocolFeesCollectorInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): ProtocolFeesCollector;
 }
+export {};

@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { ZapCurveTokenToPrincipalToken, ZapCurveTokenToPrincipalTokenInterface } from "../ZapCurveTokenToPrincipalToken";
+declare type ZapCurveTokenToPrincipalTokenConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ZapCurveTokenToPrincipalToken__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: ZapCurveTokenToPrincipalTokenConstructorParams);
     deploy(__balancer: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ZapCurveTokenToPrincipalToken>;
@@ -65,3 +66,4 @@ export declare class ZapCurveTokenToPrincipalToken__factory extends ContractFact
     static createInterface(): ZapCurveTokenToPrincipalTokenInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): ZapCurveTokenToPrincipalToken;
 }
+export {};

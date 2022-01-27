@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { StandardToken, StandardTokenInterface } from "../StandardToken";
+declare type StandardTokenConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class StandardToken__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: StandardTokenConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<StandardToken>;
@@ -44,3 +45,4 @@ export declare class StandardToken__factory extends ContractFactory {
     static createInterface(): StandardTokenInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): StandardToken;
 }
+export {};

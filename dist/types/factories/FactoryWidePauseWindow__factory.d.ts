@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { FactoryWidePauseWindow, FactoryWidePauseWindowInterface } from "../FactoryWidePauseWindow";
+declare type FactoryWidePauseWindowConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class FactoryWidePauseWindow__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: FactoryWidePauseWindowConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<FactoryWidePauseWindow>;
@@ -32,3 +33,4 @@ export declare class FactoryWidePauseWindow__factory extends ContractFactory {
     static createInterface(): FactoryWidePauseWindowInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): FactoryWidePauseWindow;
 }
+export {};

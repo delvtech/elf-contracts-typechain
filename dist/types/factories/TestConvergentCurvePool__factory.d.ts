@@ -1,8 +1,9 @@
-import { Signer, BigNumberish, ContractFactory, Overrides } from "ethers";
+import { Signer, ContractFactory, Overrides, BigNumberish } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { TestConvergentCurvePool, TestConvergentCurvePoolInterface } from "../TestConvergentCurvePool";
+declare type TestConvergentCurvePoolConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class TestConvergentCurvePool__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: TestConvergentCurvePoolConstructorParams);
     deploy(_underlying: string, _bond: string, _expiration: BigNumberish, _unitSeconds: BigNumberish, vault: string, _percentFee: BigNumberish, _governance: string, name: string, symbol: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<TestConvergentCurvePool>;
@@ -64,3 +65,4 @@ export declare class TestConvergentCurvePool__factory extends ContractFactory {
     static createInterface(): TestConvergentCurvePoolInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): TestConvergentCurvePool;
 }
+export {};

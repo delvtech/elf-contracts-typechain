@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { TestVault, TestVaultInterface } from "../TestVault";
+declare type TestVaultConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class TestVault__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: TestVaultConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<TestVault>;
@@ -36,3 +37,4 @@ export declare class TestVault__factory extends ContractFactory {
     static createInterface(): TestVaultInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): TestVault;
 }
+export {};

@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { TestWrappedPosition, TestWrappedPositionInterface } from "../TestWrappedPosition";
+declare type TestWrappedPositionConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class TestWrappedPosition__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: TestWrappedPositionConstructorParams);
     deploy(_token: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<TestWrappedPosition>;
@@ -54,3 +55,4 @@ export declare class TestWrappedPosition__factory extends ContractFactory {
     static createInterface(): TestWrappedPositionInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): TestWrappedPosition;
 }
+export {};

@@ -1,8 +1,9 @@
-import { Signer, BigNumberish, ContractFactory, Overrides } from "ethers";
+import { Signer, ContractFactory, Overrides, BigNumberish } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { TemporarilyPausableMock, TemporarilyPausableMockInterface } from "../TemporarilyPausableMock";
+declare type TemporarilyPausableMockConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class TemporarilyPausableMock__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: TemporarilyPausableMockConstructorParams);
     deploy(pauseWindowDuration: BigNumberish, bufferPeriodDuration: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<TemporarilyPausableMock>;
@@ -61,3 +62,4 @@ export declare class TemporarilyPausableMock__factory extends ContractFactory {
     static createInterface(): TemporarilyPausableMockInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): TemporarilyPausableMock;
 }
+export {};

@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MockAssetTransfersHandler, MockAssetTransfersHandlerInterface } from "../MockAssetTransfersHandler";
+declare type MockAssetTransfersHandlerConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class MockAssetTransfersHandler__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: MockAssetTransfersHandlerConstructorParams);
     deploy(weth: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MockAssetTransfersHandler>;
@@ -46,3 +47,4 @@ export declare class MockAssetTransfersHandler__factory extends ContractFactory 
     static createInterface(): MockAssetTransfersHandlerInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): MockAssetTransfersHandler;
 }
+export {};

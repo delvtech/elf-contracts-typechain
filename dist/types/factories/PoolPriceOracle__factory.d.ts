@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { PoolPriceOracle, PoolPriceOracleInterface } from "../PoolPriceOracle";
+declare type PoolPriceOracleConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class PoolPriceOracle__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: PoolPriceOracleConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<PoolPriceOracle>;
@@ -30,3 +31,4 @@ export declare class PoolPriceOracle__factory extends ContractFactory {
     static createInterface(): PoolPriceOracleInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): PoolPriceOracle;
 }
+export {};

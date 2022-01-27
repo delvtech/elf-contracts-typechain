@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { LUSD, LUSDInterface } from "../LUSD";
+declare type LUSDConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class LUSD__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: LUSDConstructorParams);
     deploy(sender: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<LUSD>;
@@ -54,3 +55,4 @@ export declare class LUSD__factory extends ContractFactory {
     static createInterface(): LUSDInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): LUSD;
 }
+export {};

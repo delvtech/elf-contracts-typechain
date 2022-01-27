@@ -1,8 +1,9 @@
-import { Signer, BigNumberish, ContractFactory, Overrides } from "ethers";
+import { Signer, ContractFactory, Overrides, BigNumberish } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { Vault, VaultInterface } from "../Vault";
+declare type VaultConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class Vault__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: VaultConstructorParams);
     deploy(authorizer: string, weth: string, pauseWindowDuration: BigNumberish, bufferPeriodDuration: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<Vault>;
@@ -71,3 +72,4 @@ export declare class Vault__factory extends ContractFactory {
     static createInterface(): VaultInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): Vault;
 }
+export {};

@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { ReentrancyAttack, ReentrancyAttackInterface } from "../ReentrancyAttack";
+declare type ReentrancyAttackConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ReentrancyAttack__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: ReentrancyAttackConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ReentrancyAttack>;
@@ -26,3 +27,4 @@ export declare class ReentrancyAttack__factory extends ContractFactory {
     static createInterface(): ReentrancyAttackInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): ReentrancyAttack;
 }
+export {};

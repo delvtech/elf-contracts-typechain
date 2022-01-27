@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { Multicall, MulticallInterface } from "../Multicall";
+declare type MulticallConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class Multicall__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: MulticallConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<Multicall>;
@@ -49,3 +50,4 @@ export declare class Multicall__factory extends ContractFactory {
     static createInterface(): MulticallInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): Multicall;
 }
+export {};

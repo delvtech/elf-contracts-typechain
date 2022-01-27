@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { USDC, USDCInterface } from "../USDC";
+declare type USDCConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class USDC__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: USDCConstructorParams);
     deploy(sender: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<USDC>;
@@ -54,3 +55,4 @@ export declare class USDC__factory extends ContractFactory {
     static createInterface(): USDCInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): USDC;
 }
+export {};
