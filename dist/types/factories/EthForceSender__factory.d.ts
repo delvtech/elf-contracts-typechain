@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, PayableOverrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { EthForceSender, EthForceSenderInterface } from "../EthForceSender";
+declare type EthForceSenderConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class EthForceSender__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: EthForceSenderConstructorParams);
     deploy(recipient: string, overrides?: PayableOverrides & {
         from?: string | Promise<string>;
     }): Promise<EthForceSender>;
@@ -24,3 +25,4 @@ export declare class EthForceSender__factory extends ContractFactory {
     static createInterface(): EthForceSenderInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): EthForceSender;
 }
+export {};

@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { SignaturesValidatorMock, SignaturesValidatorMockInterface } from "../SignaturesValidatorMock";
+declare type SignaturesValidatorMockConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class SignaturesValidatorMock__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: SignaturesValidatorMockConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<SignaturesValidatorMock>;
@@ -50,3 +51,4 @@ export declare class SignaturesValidatorMock__factory extends ContractFactory {
     static createInterface(): SignaturesValidatorMockInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): SignaturesValidatorMock;
 }
+export {};

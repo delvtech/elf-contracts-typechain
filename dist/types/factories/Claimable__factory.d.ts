@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { Claimable, ClaimableInterface } from "../Claimable";
+declare type ClaimableConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class Claimable__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: ClaimableConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<Claimable>;
@@ -53,3 +54,4 @@ export declare class Claimable__factory extends ContractFactory {
     static createInterface(): ClaimableInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): Claimable;
 }
+export {};

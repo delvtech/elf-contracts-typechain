@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { BalanceAllocationMock, BalanceAllocationMockInterface } from "../BalanceAllocationMock";
+declare type BalanceAllocationMockConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class BalanceAllocationMock__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: BalanceAllocationMockConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<BalanceAllocationMock>;
@@ -30,3 +31,4 @@ export declare class BalanceAllocationMock__factory extends ContractFactory {
     static createInterface(): BalanceAllocationMockInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): BalanceAllocationMock;
 }
+export {};

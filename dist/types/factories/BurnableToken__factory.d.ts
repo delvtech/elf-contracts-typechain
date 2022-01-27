@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { BurnableToken, BurnableTokenInterface } from "../BurnableToken";
+declare type BurnableTokenConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class BurnableToken__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: BurnableTokenConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<BurnableToken>;
@@ -44,3 +45,4 @@ export declare class BurnableToken__factory extends ContractFactory {
     static createInterface(): BurnableTokenInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): BurnableToken;
 }
+export {};

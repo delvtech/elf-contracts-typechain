@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { ReentrancyMock, ReentrancyMockInterface } from "../ReentrancyMock";
+declare type ReentrancyMockConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class ReentrancyMock__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: ReentrancyMockConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ReentrancyMock>;
@@ -42,3 +43,4 @@ export declare class ReentrancyMock__factory extends ContractFactory {
     static createInterface(): ReentrancyMockInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): ReentrancyMock;
 }
+export {};

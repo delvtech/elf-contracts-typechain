@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { BalancerErrorsMock, BalancerErrorsMockInterface } from "../BalancerErrorsMock";
+declare type BalancerErrorsMockConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class BalancerErrorsMock__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: BalancerErrorsMockConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<BalancerErrorsMock>;
@@ -26,3 +27,4 @@ export declare class BalancerErrorsMock__factory extends ContractFactory {
     static createInterface(): BalancerErrorsMockInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): BalancerErrorsMock;
 }
+export {};

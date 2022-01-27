@@ -1,8 +1,9 @@
-import { Signer, BigNumberish, ContractFactory, Overrides } from "ethers";
+import { Signer, ContractFactory, Overrides, BigNumberish } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { TestYVault, TestYVaultInterface } from "../TestYVault";
+declare type TestYVaultConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class TestYVault__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: TestYVaultConstructorParams);
     deploy(_token: string, _decimals: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<TestYVault>;
@@ -54,3 +55,4 @@ export declare class TestYVault__factory extends ContractFactory {
     static createInterface(): TestYVaultInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): TestYVault;
 }
+export {};

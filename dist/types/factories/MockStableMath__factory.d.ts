@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MockStableMath, MockStableMathInterface } from "../MockStableMath";
+declare type MockStableMathConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class MockStableMath__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: MockStableMathConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MockStableMath>;
@@ -30,3 +31,4 @@ export declare class MockStableMath__factory extends ContractFactory {
     static createInterface(): MockStableMathInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): MockStableMath;
 }
+export {};

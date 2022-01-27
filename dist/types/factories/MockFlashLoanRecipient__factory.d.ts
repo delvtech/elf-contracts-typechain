@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MockFlashLoanRecipient, MockFlashLoanRecipientInterface } from "../MockFlashLoanRecipient";
+declare type MockFlashLoanRecipientConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class MockFlashLoanRecipient__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: MockFlashLoanRecipientConstructorParams);
     deploy(_vault: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MockFlashLoanRecipient>;
@@ -46,3 +47,4 @@ export declare class MockFlashLoanRecipient__factory extends ContractFactory {
     static createInterface(): MockFlashLoanRecipientInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): MockFlashLoanRecipient;
 }
+export {};

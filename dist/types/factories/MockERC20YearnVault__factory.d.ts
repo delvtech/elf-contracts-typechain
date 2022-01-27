@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MockERC20YearnVault, MockERC20YearnVaultInterface } from "../MockERC20YearnVault";
+declare type MockERC20YearnVaultConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class MockERC20YearnVault__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: MockERC20YearnVaultConstructorParams);
     deploy(_token: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MockERC20YearnVault>;
@@ -54,3 +55,4 @@ export declare class MockERC20YearnVault__factory extends ContractFactory {
     static createInterface(): MockERC20YearnVaultInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): MockERC20YearnVault;
 }
+export {};

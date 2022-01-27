@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { WETH, WETHInterface } from "../WETH";
+declare type WETHConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class WETH__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: WETHConstructorParams);
     deploy(sender: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<WETH>;
@@ -54,3 +55,4 @@ export declare class WETH__factory extends ContractFactory {
     static createInterface(): WETHInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): WETH;
 }
+export {};

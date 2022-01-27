@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { WeightedPoolFactory, WeightedPoolFactoryInterface } from "../WeightedPoolFactory";
+declare type WeightedPoolFactoryConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class WeightedPoolFactory__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: WeightedPoolFactoryConstructorParams);
     deploy(vault: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<WeightedPoolFactory>;
@@ -54,3 +55,4 @@ export declare class WeightedPoolFactory__factory extends ContractFactory {
     static createInterface(): WeightedPoolFactoryInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): WeightedPoolFactory;
 }
+export {};

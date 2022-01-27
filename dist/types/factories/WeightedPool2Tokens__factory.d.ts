@@ -1,38 +1,13 @@
-import { Signer, BigNumberish, ContractFactory, Overrides } from "ethers";
+import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { WeightedPool2Tokens, WeightedPool2TokensInterface } from "../WeightedPool2Tokens";
+import type { WeightedPool2Tokens, WeightedPool2TokensInterface, NewPoolParamsStruct } from "../WeightedPool2Tokens";
+declare type WeightedPool2TokensConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class WeightedPool2Tokens__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
-    deploy(params: {
-        vault: string;
-        name: string;
-        symbol: string;
-        token0: string;
-        token1: string;
-        normalizedWeight0: BigNumberish;
-        normalizedWeight1: BigNumberish;
-        swapFeePercentage: BigNumberish;
-        pauseWindowDuration: BigNumberish;
-        bufferPeriodDuration: BigNumberish;
-        oracleEnabled: boolean;
-        owner: string;
-    }, overrides?: Overrides & {
+    constructor(...args: WeightedPool2TokensConstructorParams);
+    deploy(params: NewPoolParamsStruct, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<WeightedPool2Tokens>;
-    getDeployTransaction(params: {
-        vault: string;
-        name: string;
-        symbol: string;
-        token0: string;
-        token1: string;
-        normalizedWeight0: BigNumberish;
-        normalizedWeight1: BigNumberish;
-        swapFeePercentage: BigNumberish;
-        pauseWindowDuration: BigNumberish;
-        bufferPeriodDuration: BigNumberish;
-        oracleEnabled: boolean;
-        owner: string;
-    }, overrides?: Overrides & {
+    getDeployTransaction(params: NewPoolParamsStruct, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): TransactionRequest;
     attach(address: string): WeightedPool2Tokens;
@@ -95,3 +70,4 @@ export declare class WeightedPool2Tokens__factory extends ContractFactory {
     static createInterface(): WeightedPool2TokensInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): WeightedPool2Tokens;
 }
+export {};

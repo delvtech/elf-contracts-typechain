@@ -1,8 +1,9 @@
-import { Signer, BigNumberish, ContractFactory, Overrides } from "ethers";
+import { Signer, ContractFactory, Overrides, BigNumberish } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { TestToken, TestTokenInterface } from "../TestToken";
+declare type TestTokenConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class TestToken__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: TestTokenConstructorParams);
     deploy(admin: string, name: string, symbol: string, decimals: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<TestToken>;
@@ -54,3 +55,4 @@ export declare class TestToken__factory extends ContractFactory {
     static createInterface(): TestTokenInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): TestToken;
 }
+export {};

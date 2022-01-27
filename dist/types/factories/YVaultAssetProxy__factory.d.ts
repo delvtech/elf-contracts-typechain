@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { YVaultAssetProxy, YVaultAssetProxyInterface } from "../YVaultAssetProxy";
+declare type YVaultAssetProxyConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class YVaultAssetProxy__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: YVaultAssetProxyConstructorParams);
     deploy(vault_: string, _token: string, _name: string, _symbol: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<YVaultAssetProxy>;
@@ -54,3 +55,4 @@ export declare class YVaultAssetProxy__factory extends ContractFactory {
     static createInterface(): YVaultAssetProxyInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): YVaultAssetProxy;
 }
+export {};

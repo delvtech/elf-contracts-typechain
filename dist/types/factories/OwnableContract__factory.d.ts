@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { OwnableContract, OwnableContractInterface } from "../OwnableContract";
+declare type OwnableContractConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class OwnableContract__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: OwnableContractConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<OwnableContract>;
@@ -53,3 +54,4 @@ export declare class OwnableContract__factory extends ContractFactory {
     static createInterface(): OwnableContractInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): OwnableContract;
 }
+export {};

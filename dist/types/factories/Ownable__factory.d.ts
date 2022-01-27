@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { Ownable, OwnableInterface } from "../Ownable";
+declare type OwnableConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class Ownable__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: OwnableConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<Ownable>;
@@ -62,3 +63,4 @@ export declare class Ownable__factory extends ContractFactory {
     static createInterface(): OwnableInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): Ownable;
 }
+export {};
