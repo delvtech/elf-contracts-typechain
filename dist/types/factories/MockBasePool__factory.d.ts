@@ -1,8 +1,9 @@
-import { Signer, BigNumberish, ContractFactory, Overrides } from "ethers";
+import { Signer, ContractFactory, Overrides, BigNumberish } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MockBasePool, MockBasePoolInterface } from "../MockBasePool";
+declare type MockBasePoolConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class MockBasePool__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: MockBasePoolConstructorParams);
     deploy(vault: string, specialization: BigNumberish, name: string, symbol: string, tokens: string[], swapFeePercentage: BigNumberish, pauseWindowDuration: BigNumberish, bufferPeriodDuration: BigNumberish, owner: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MockBasePool>;
@@ -54,3 +55,4 @@ export declare class MockBasePool__factory extends ContractFactory {
     static createInterface(): MockBasePoolInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): MockBasePool;
 }
+export {};

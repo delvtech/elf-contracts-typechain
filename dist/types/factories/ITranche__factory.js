@@ -357,6 +357,32 @@ const _abi = [
         type: "function",
     },
     {
+        inputs: [],
+        name: "underlying",
+        outputs: [
+            {
+                internalType: "contract IERC20",
+                name: "",
+                type: "address",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+    },
+    {
+        inputs: [],
+        name: "unlockTimestamp",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+    },
+    {
         inputs: [
             {
                 internalType: "uint256",

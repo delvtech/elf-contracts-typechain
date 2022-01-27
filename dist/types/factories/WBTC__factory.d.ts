@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { WBTC, WBTCInterface } from "../WBTC";
+declare type WBTCConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class WBTC__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: WBTCConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<WBTC>;
@@ -44,3 +45,4 @@ export declare class WBTC__factory extends ContractFactory {
     static createInterface(): WBTCInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): WBTC;
 }
+export {};

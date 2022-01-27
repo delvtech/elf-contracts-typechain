@@ -13,6 +13,14 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "AccessControl",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AccessControl__factory>;
+    getContractFactory(
+      name: "IAccessControl",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IAccessControl__factory>;
+    getContractFactory(
       name: "ERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20__factory>;
@@ -32,6 +40,14 @@ declare module "hardhat/types/runtime" {
       name: "IERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "ERC165",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC165__factory>;
+    getContractFactory(
+      name: "IERC165",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC165__factory>;
     getContractFactory(
       name: "Authentication",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -337,9 +353,25 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.VaultAuthorization__factory>;
     getContractFactory(
+      name: "CompoundAssetProxy",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CompoundAssetProxy__factory>;
+    getContractFactory(
       name: "ConvergentCurvePool",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ConvergentCurvePool__factory>;
+    getContractFactory(
+      name: "IWrappedCoveredPrincipalToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IWrappedCoveredPrincipalToken__factory>;
+    getContractFactory(
+      name: "WrappedCoveredPrincipalToken",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.WrappedCoveredPrincipalToken__factory>;
+    getContractFactory(
+      name: "WrappedCoveredPrincipalTokenFactory",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.WrappedCoveredPrincipalTokenFactory__factory>;
     getContractFactory(
       name: "ConvergentPoolFactory",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -356,6 +388,38 @@ declare module "hardhat/types/runtime" {
       name: "InterestToken",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.InterestToken__factory>;
+    getContractFactory(
+      name: "ComptrollerInterface",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ComptrollerInterface__factory>;
+    getContractFactory(
+      name: "CDelegateInterface",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CDelegateInterface__factory>;
+    getContractFactory(
+      name: "CDelegationStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CDelegationStorage__factory>;
+    getContractFactory(
+      name: "CDelegatorInterface",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CDelegatorInterface__factory>;
+    getContractFactory(
+      name: "CErc20Interface",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CErc20Interface__factory>;
+    getContractFactory(
+      name: "CErc20Storage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CErc20Storage__factory>;
+    getContractFactory(
+      name: "CTokenInterface",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CTokenInterface__factory>;
+    getContractFactory(
+      name: "CTokenStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CTokenStorage__factory>;
     getContractFactory(
       name: "IERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -440,6 +504,10 @@ declare module "hardhat/types/runtime" {
       name: "TestEthSender",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.TestEthSender__factory>;
+    getContractFactory(
+      name: "TestTranche",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.TestTranche__factory>;
     getContractFactory(
       name: "TestUserProxy",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -578,6 +646,16 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.WETH__factory>;
 
     getContractAt(
+      name: "AccessControl",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AccessControl>;
+    getContractAt(
+      name: "IAccessControl",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IAccessControl>;
+    getContractAt(
       name: "ERC20",
       address: string,
       signer?: ethers.Signer
@@ -602,6 +680,16 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "ERC165",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC165>;
+    getContractAt(
+      name: "IERC165",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC165>;
     getContractAt(
       name: "Authentication",
       address: string,
@@ -983,10 +1071,30 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.VaultAuthorization>;
     getContractAt(
+      name: "CompoundAssetProxy",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CompoundAssetProxy>;
+    getContractAt(
       name: "ConvergentCurvePool",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ConvergentCurvePool>;
+    getContractAt(
+      name: "IWrappedCoveredPrincipalToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IWrappedCoveredPrincipalToken>;
+    getContractAt(
+      name: "WrappedCoveredPrincipalToken",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WrappedCoveredPrincipalToken>;
+    getContractAt(
+      name: "WrappedCoveredPrincipalTokenFactory",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.WrappedCoveredPrincipalTokenFactory>;
     getContractAt(
       name: "ConvergentPoolFactory",
       address: string,
@@ -1007,6 +1115,46 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.InterestToken>;
+    getContractAt(
+      name: "ComptrollerInterface",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ComptrollerInterface>;
+    getContractAt(
+      name: "CDelegateInterface",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CDelegateInterface>;
+    getContractAt(
+      name: "CDelegationStorage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CDelegationStorage>;
+    getContractAt(
+      name: "CDelegatorInterface",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CDelegatorInterface>;
+    getContractAt(
+      name: "CErc20Interface",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CErc20Interface>;
+    getContractAt(
+      name: "CErc20Storage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CErc20Storage>;
+    getContractAt(
+      name: "CTokenInterface",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CTokenInterface>;
+    getContractAt(
+      name: "CTokenStorage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CTokenStorage>;
     getContractAt(
       name: "IERC20",
       address: string,
@@ -1112,6 +1260,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.TestEthSender>;
+    getContractAt(
+      name: "TestTranche",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.TestTranche>;
     getContractAt(
       name: "TestUserProxy",
       address: string,

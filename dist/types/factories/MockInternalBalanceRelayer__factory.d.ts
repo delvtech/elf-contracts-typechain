@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MockInternalBalanceRelayer, MockInternalBalanceRelayerInterface } from "../MockInternalBalanceRelayer";
+declare type MockInternalBalanceRelayerConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class MockInternalBalanceRelayer__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: MockInternalBalanceRelayerConstructorParams);
     deploy(_vault: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MockInternalBalanceRelayer>;
@@ -46,3 +47,4 @@ export declare class MockInternalBalanceRelayer__factory extends ContractFactory
     static createInterface(): MockInternalBalanceRelayerInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): MockInternalBalanceRelayer;
 }
+export {};

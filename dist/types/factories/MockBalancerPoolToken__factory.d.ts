@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MockBalancerPoolToken, MockBalancerPoolTokenInterface } from "../MockBalancerPoolToken";
+declare type MockBalancerPoolTokenConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class MockBalancerPoolToken__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: MockBalancerPoolTokenConstructorParams);
     deploy(name: string, symbol: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MockBalancerPoolToken>;
@@ -54,3 +55,4 @@ export declare class MockBalancerPoolToken__factory extends ContractFactory {
     static createInterface(): MockBalancerPoolTokenInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): MockBalancerPoolToken;
 }
+export {};

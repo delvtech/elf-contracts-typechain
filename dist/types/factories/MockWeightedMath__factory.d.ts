@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MockWeightedMath, MockWeightedMathInterface } from "../MockWeightedMath";
+declare type MockWeightedMathConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class MockWeightedMath__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: MockWeightedMathConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MockWeightedMath>;
@@ -30,3 +31,4 @@ export declare class MockWeightedMath__factory extends ContractFactory {
     static createInterface(): MockWeightedMathInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): MockWeightedMath;
 }
+export {};

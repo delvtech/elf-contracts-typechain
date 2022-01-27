@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { Pausable, PausableInterface } from "../Pausable";
+declare type PausableConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class Pausable__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: PausableConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<Pausable>;
@@ -53,3 +54,4 @@ export declare class Pausable__factory extends ContractFactory {
     static createInterface(): PausableInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): Pausable;
 }
+export {};

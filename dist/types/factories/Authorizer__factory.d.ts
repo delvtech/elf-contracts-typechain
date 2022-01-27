@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { Authorizer, AuthorizerInterface } from "../Authorizer";
+declare type AuthorizerConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class Authorizer__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: AuthorizerConstructorParams);
     deploy(admin: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<Authorizer>;
@@ -54,3 +55,4 @@ export declare class Authorizer__factory extends ContractFactory {
     static createInterface(): AuthorizerInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): Authorizer;
 }
+export {};

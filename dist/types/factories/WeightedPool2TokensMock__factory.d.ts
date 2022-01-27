@@ -1,38 +1,13 @@
-import { Signer, BigNumberish, ContractFactory, Overrides } from "ethers";
+import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { WeightedPool2TokensMock, WeightedPool2TokensMockInterface } from "../WeightedPool2TokensMock";
+import type { WeightedPool2TokensMock, WeightedPool2TokensMockInterface, NewPoolParamsStruct } from "../WeightedPool2TokensMock";
+declare type WeightedPool2TokensMockConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class WeightedPool2TokensMock__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
-    deploy(params: {
-        vault: string;
-        name: string;
-        symbol: string;
-        token0: string;
-        token1: string;
-        normalizedWeight0: BigNumberish;
-        normalizedWeight1: BigNumberish;
-        swapFeePercentage: BigNumberish;
-        pauseWindowDuration: BigNumberish;
-        bufferPeriodDuration: BigNumberish;
-        oracleEnabled: boolean;
-        owner: string;
-    }, overrides?: Overrides & {
+    constructor(...args: WeightedPool2TokensMockConstructorParams);
+    deploy(params: NewPoolParamsStruct, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<WeightedPool2TokensMock>;
-    getDeployTransaction(params: {
-        vault: string;
-        name: string;
-        symbol: string;
-        token0: string;
-        token1: string;
-        normalizedWeight0: BigNumberish;
-        normalizedWeight1: BigNumberish;
-        swapFeePercentage: BigNumberish;
-        pauseWindowDuration: BigNumberish;
-        bufferPeriodDuration: BigNumberish;
-        oracleEnabled: boolean;
-        owner: string;
-    }, overrides?: Overrides & {
+    getDeployTransaction(params: NewPoolParamsStruct, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): TransactionRequest;
     attach(address: string): WeightedPool2TokensMock;
@@ -115,3 +90,4 @@ export declare class WeightedPool2TokensMock__factory extends ContractFactory {
     static createInterface(): WeightedPool2TokensMockInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): WeightedPool2TokensMock;
 }
+export {};

@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MintableToken, MintableTokenInterface } from "../MintableToken";
+declare type MintableTokenConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class MintableToken__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: MintableTokenConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MintableToken>;
@@ -44,3 +45,4 @@ export declare class MintableToken__factory extends ContractFactory {
     static createInterface(): MintableTokenInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): MintableToken;
 }
+export {};

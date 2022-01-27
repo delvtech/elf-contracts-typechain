@@ -1,8 +1,9 @@
-import { Signer, BigNumberish, ContractFactory, Overrides } from "ethers";
+import { Signer, ContractFactory, Overrides, BigNumberish } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { TestERC20, TestERC20Interface } from "../TestERC20";
+declare type TestERC20ConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class TestERC20__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: TestERC20ConstructorParams);
     deploy(name_: string, symbol_: string, decimals_: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<TestERC20>;
@@ -54,3 +55,4 @@ export declare class TestERC20__factory extends ContractFactory {
     static createInterface(): TestERC20Interface;
     static connect(address: string, signerOrProvider: Signer | Provider): TestERC20;
 }
+export {};

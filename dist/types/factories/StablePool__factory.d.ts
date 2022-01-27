@@ -1,8 +1,9 @@
-import { Signer, BigNumberish, ContractFactory, Overrides } from "ethers";
+import { Signer, ContractFactory, Overrides, BigNumberish } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { StablePool, StablePoolInterface } from "../StablePool";
+declare type StablePoolConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class StablePool__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: StablePoolConstructorParams);
     deploy(vault: string, name: string, symbol: string, tokens: string[], amplificationParameter: BigNumberish, swapFeePercentage: BigNumberish, pauseWindowDuration: BigNumberish, bufferPeriodDuration: BigNumberish, owner: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<StablePool>;
@@ -64,3 +65,4 @@ export declare class StablePool__factory extends ContractFactory {
     static createInterface(): StablePoolInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): StablePool;
 }
+export {};

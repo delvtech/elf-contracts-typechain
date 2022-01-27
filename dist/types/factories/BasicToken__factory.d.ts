@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { BasicToken, BasicTokenInterface } from "../BasicToken";
+declare type BasicTokenConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class BasicToken__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: BasicTokenConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<BasicToken>;
@@ -44,3 +45,4 @@ export declare class BasicToken__factory extends ContractFactory {
     static createInterface(): BasicTokenInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): BasicToken;
 }
+export {};

@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { MockFactoryCreatedPool, MockFactoryCreatedPoolInterface } from "../MockFactoryCreatedPool";
+declare type MockFactoryCreatedPoolConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class MockFactoryCreatedPool__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: MockFactoryCreatedPoolConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<MockFactoryCreatedPool>;
@@ -26,3 +27,4 @@ export declare class MockFactoryCreatedPool__factory extends ContractFactory {
     static createInterface(): MockFactoryCreatedPoolInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): MockFactoryCreatedPool;
 }
+export {};

@@ -1,8 +1,9 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { CanReclaimToken, CanReclaimTokenInterface } from "../CanReclaimToken";
+declare type CanReclaimTokenConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class CanReclaimToken__factory extends ContractFactory {
-    constructor(...args: [signer: Signer] | ConstructorParameters<typeof ContractFactory>);
+    constructor(...args: CanReclaimTokenConstructorParams);
     deploy(overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<CanReclaimToken>;
@@ -53,3 +54,4 @@ export declare class CanReclaimToken__factory extends ContractFactory {
     static createInterface(): CanReclaimTokenInterface;
     static connect(address: string, signerOrProvider: Signer | Provider): CanReclaimToken;
 }
+export {};
