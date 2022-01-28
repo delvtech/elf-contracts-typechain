@@ -1,13 +1,12 @@
 # elf-contracts-typechain
+
 Typechain codegen for generating Typescript classes and types for elf-contracts
-
-
 
 ## Install
 Run
 
 ``` bash
-npm i --save-dev @elementfi/elf-contracts-typechain
+npm i --save-dev @elementfi/core-typechain
 ```
 
 ## Development
