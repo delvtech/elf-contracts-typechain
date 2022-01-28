@@ -5,8 +5,8 @@
   "dependencies": {
     "tsc": "^2.0.4"
   },
-  "main": "dist/types/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.4",
     "@nomiclabs/hardhat-vyper": "^3.0.0",
@@ -34,6 +34,7 @@
   "scripts": {
     "_build": "sh scripts/build-contracts.sh",
     "_load-contracts": "sh scripts/load-elf-contracts.sh",
-    "build": "npm run _load-contracts && npm run _build"
+    "build": "npm run _load-contracts && npm run _build",
+    "postinstall": "npm run build"
   }
 }

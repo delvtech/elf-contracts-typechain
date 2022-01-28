@@ -26,20 +26,6 @@ const config: HardhatUserConfig = {
     outDir: "types",
     target: "ethers-v5",
   },
-
-  networks: {
-    hardhat: {
-      gas: 1000000000000000000,
-      blockGasLimit: 0x1fffffffffffff,
-      allowUnlimitedContractSize: true,
-    },
-    mainnet: {
-      url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_MAINNET_API_KEY}`,
-    },
-    goerli: {
-      url: `https://eth-goerli.alchemyapi.io/v2/${process.env.ALCHEMY_GOERLI_API_KEY}`,
-    },
-  },
 };
 
 export default config;

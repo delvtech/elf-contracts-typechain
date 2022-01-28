@@ -10,12 +10,12 @@ npx hardhat compile
 # create the main index.d.ts definition file.
 tsc --project tsconfig.json
 
-mkdir -p dist/types
+mkdir -p dist
 
 # Copy over contract definitions.
-cp -R types/* dist/types
-cp -R src/localTypes/* dist/types
+cp -R types/* dist/
+cp -R src/localTypes/* dist/
 
 # Copy over compiled factory definitions.
-cp -R compiled/types/* dist/types/
-cp -R compiled/src/localTypes/factories/* dist/types/factories
+cp -R compiled/types/* dist/
+cp -R compiled/src/localTypes/* dist/

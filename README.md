@@ -1,14 +1,23 @@
 # elf-contracts-typechain
 Typechain codegen for generating Typescript classes and types for elf-contracts
 
-## Install
-Run 
 
-```
-npm install git+https://github.com/element-fi/elf-contracts-typechain.git
+
+## Install
+Run
+
+``` bash
+npm i --save-dev @elementfi/elf-contracts-typechain
 ```
 
 ## Development
+Run 
+
+```
+npm ci
+```
+
+This will run the build process constructing dist/ in the postinstall phase
 
 Make changes or add new contracts in the `src/localContracts` directory then run the build command:
 ```
