@@ -1,5 +1,5 @@
 {
-  "name": "elf-contracts-typechain",
+  "name": "@elementfi/elf-contracts-typechain",
   "version": "1.0.0",
   "description": "",
   "dependencies": {
