@@ -18,4 +18,4 @@ cp -R src/localTypes/* dist/
 
 # Copy over compiled factory definitions.
 cp -R compiled/types/* dist/
-cp -R compiled/src/localTypes/factories/* dist/types/
+cp -R compiled/src/localTypes/factories/* dist/
