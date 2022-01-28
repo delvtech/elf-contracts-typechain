@@ -13,6 +13,7 @@ tsc --project tsconfig.json
 mkdir -p dist
 
 # Copy over contract definitions.
+cp -R src/types/* dist/
 cp -R src/localTypes/* dist/
 
 # Copy over compiled factory definitions.
