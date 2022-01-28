@@ -34,6 +34,7 @@
   "scripts": {
     "_build": "sh scripts/build-contracts.sh",
     "_load-contracts": "sh scripts/load-elf-contracts.sh",
-    "build": "npm run _load-contracts && npm run _build"
+    "build": "npm run _load-contracts && npm run _build",
+    "postinstall": "npm run build"
   }
 }
