@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-import "../../contracts/interfaces/IERC20.sol";
+import "./IERC20.sol";
 
 abstract contract ERC20 is IERC20 {
     // --- ERC20 Data ---

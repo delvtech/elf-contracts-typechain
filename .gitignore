@@ -8,8 +8,8 @@ compiled
 
 # Don't check in the compiled types, as they aren't the complete picture (no local contracts)
 types
+!src/types
 
 # we bundle in the dist/ so it's easy to use this repo as a npm package
 #!dist/types/
 dist
-elf-contracts

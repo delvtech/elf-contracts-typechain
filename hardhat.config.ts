@@ -4,7 +4,7 @@ import { HardhatUserConfig } from "hardhat/config";
 
 const config: HardhatUserConfig = {
   paths: {
-    sources: "src",
+    sources: process.env.SOURCE_CONTRACTS_PATH,
   },
   solidity: {
     compilers: [
@@ -23,7 +23,7 @@ const config: HardhatUserConfig = {
     ],
   },
   typechain: {
-    outDir: "types",
+    outDir: process.env.TYPECHAIN_OUTDIR,
     target: "ethers-v5",
   },
 };
