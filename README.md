@@ -6,7 +6,7 @@ Typechain codegen for generating Typescript classes and types for elf-contracts
 Run
 
 ``` bash
-npm i --save-dev @elementfi/core-typechain
+npm install @elementfi/core-typechain
 ```
 
 ## Development
@@ -24,15 +24,6 @@ npm run build
 ```
 
 This will produce new files in `dist/` that can be checked in.
-
-## Here, take this!
-Since this repo is not an npm package, it can be helpful to include this simple script to upgrade your project to the latest commit:
-
-```
-  "scripts": {
-    "update-elf-contracts-typechain": "npm install git+https://github.com/element-fi/elf-contracts-typechain.git"
-  },
-```
 
 ## Publishing elf-contracts-typechain
 To release and publish the new token list:
