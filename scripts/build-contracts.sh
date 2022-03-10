@@ -8,9 +8,19 @@ export SOURCE_CONTRACTS_PATH="src/libraries"
 export TYPECHAIN_OUTDIR="types/libraries"
 npx hardhat compile --show-stack-traces
 
+# Because we are compiling the contracts for each version separately, we must
+# remove the artifacts and compiled files after each build, since hardhat caches
+# artifacts.
+rm -rf artifacts compiled
+
 export SOURCE_CONTRACTS_PATH="src/v1"
 export TYPECHAIN_OUTDIR="types/v1"
 npx hardhat compile --show-stack-traces
+
+# Because we are compiling the contracts for each version separately, we must
+# remove the artifacts and compiled files after each build, since hardhat caches
+# artifacts.
+rm -rf artifacts compiled
 
 export SOURCE_CONTRACTS_PATH="src/v1.1"
 export TYPECHAIN_OUTDIR="types/v1.1"
