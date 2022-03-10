@@ -1,11 +1,13 @@
 {
   "name": "@elementfi/core-typechain",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "",
   "dependencies": {
     "tsc": "^2.0.4"
   },
-  "files":["dist"],
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.4",
     "@nomiclabs/hardhat-vyper": "^3.0.0",
