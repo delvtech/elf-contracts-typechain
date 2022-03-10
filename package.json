@@ -5,8 +5,7 @@
   "dependencies": {
     "tsc": "^2.0.4"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "files":["dist"],
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.4",
     "@nomiclabs/hardhat-vyper": "^3.0.0",
