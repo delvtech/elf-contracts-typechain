@@ -10,4 +10,4 @@ cp -R -v compiled/* dist/
 cp -R -v precompiled/factories/* dist/libraries/factories
 
 # Copy over the precompiled types 
-cp -R -v precompiled/*.d.ts dist/libraries
+cp -R precompiled/*.d.ts dist/libraries/
