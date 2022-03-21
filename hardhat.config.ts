@@ -1,4 +1,5 @@
 import "@typechain/hardhat";
+import "@nomiclabs/hardhat-vyper";
 
 import { HardhatUserConfig } from "hardhat/config";
 
@@ -19,6 +20,22 @@ const config: HardhatUserConfig = {
       },
       {
         version: "0.8.0",
+      },
+    ],
+  },
+  vyper: {
+    compilers: [
+      {
+        version: "0.2.0",
+      },
+      {
+        version: "0.2.4",
+      },
+      {
+        version: "0.2.8",
+      },
+      {
+        version: "0.2.12",
       },
     ],
   },
