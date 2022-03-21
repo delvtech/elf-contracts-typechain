@@ -6,4 +6,4 @@ artifacts
 compiled
 dist
 typechain-types
-
+shell.nix
