@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.0;
 
-interface CurvePoolWith2Tokens {
-    function calc_token_amount(uint256[2] memory amounts, bool isDeposit)
+interface CurvePool2 {
+    function calc_token_amount(uint256[3] memory amounts, bool isDeposit)
         external
         view
         returns (uint256);
